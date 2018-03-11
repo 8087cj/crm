@@ -53,7 +53,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--basePackage 属性是映射器接口文件的包路径。-->
         <!--你可以使用分号或逗号 作为分隔符设置多于一个的包路径-->
-        <property name="basePackage" value="com/zking/book/**/mapper"/>
+        <property name="basePackage" value="com/zking/crm/**/mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
