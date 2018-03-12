@@ -51,7 +51,7 @@
                             <div class="button_bar">
                                 <button class="common_button" onclick="help('');">帮助</button>
                                 <button class="common_button" onclick="back();">返回</button>
-                                <button class="common_button" onclick="add('list.html');">保存</button>
+                                <button class="common_button" onclick="add('list.jsp');">保存</button>
                             </div>
                             <table class="query_form_table">
                                 <tr>

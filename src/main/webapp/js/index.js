@@ -1,7 +1,7 @@
 $(function() {
   var ctx, data, myLineChart, options;
   Chart.defaults.global.responsive = true;
-  ctx = $('#jumbotron-line-chart').get(0).getContext('2d');
+  ctx = $('#jumbotron-line-chart').get(0).getContent('2d');
   options = {
     showScale: false,
     scaleShowGridLines: false,

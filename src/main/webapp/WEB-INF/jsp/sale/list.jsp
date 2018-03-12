@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
     <title>销售机会管理</title>
@@ -39,70 +43,33 @@
         </div>
 
         <!-- Main Content -->
-        <div class="container-fluid">
-            <div class="side-body">
+        <div class="container-fluid" >
+            <div class="side-body" id="tt">
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="card">
+                        <div class="card" >
 
                             <!--链接start-->
                             <div class="button_bar">
                                 <button class="common_button" onclick="help('');">帮助</button>
-                                <button class="common_button" onclick="to('add.html');">新建</button>
-                                <button class="common_button" onclick="reload();">查询</button>
+                                <button class="common_button" onclick="reload();" id="listBtn">查询</button>
                             </div>
                             <table class="query_form_table">
                                 <tr>
                                     <th>客户名称</th>
-                                    <td><input /></td>
+                                    <td id="chcCustName"><input /></td>
                                     <th>概要</th>
-                                    <td><input /></td>
+                                    <td id="chcTitle"><input /></td>
                                     <th>联系人</th>
                                     <td>
-                                        <input name="T1" size="20" />
+                                        <input name="T1" size="20" id="chcLinkman"/>
                                     </td>
                                 </tr>
                             </table>
                             <br />
-                            <table class="data_list_table">
-                                <tr>
-                                    <th>编号</th>
-                                    <th>客户名称</th>
-                                    <th>概要</th>
-                                    <th>联系人</th>
-                                    <th>联系人电话</th>
-                                    <th>创建时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">1</td>
-                                    <td class="list_data_text">睿智数码</td>
-                                    <td class="list_data_ltext">采购笔记本电脑意向</td>
-                                    <td class="list_data_text">刘先生</td>
-                                    <td class="list_data_text">13729239239</td>
-                                    <td class="list_data_text">2007年12月06日</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('dispatch.html');" title="指派" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="del('“销售机会：采购笔记本电脑意向”');" title="删除" src="../images/bt_del.gif" class="op_button" />
+                            <table class="data_list_table" id="sc">
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th colspan="7" class="pager">
-                                        <div class="pager">
-                                            共59条记录 每页<input value="10" size="2" />条
-                                            第<input value="1" size="2"/>页/共5页
-                                            <a href="#">第一页</a>
-                                            <a href="#">上一页</a>
-                                            <a href="#">下一页</a>
-                                            <a href="#">最后一页</a>
-                                            转到<input value="1" size="2" />页
-                                            <button width="20" onclick="reload();">GO</button>
-                                        </div>
-                                    </th>
-                                </tr>
                             </table>
                             <!--链接end-->
 
@@ -119,9 +86,114 @@
         </div>
     </footer>
     <div>
+        <script type="text/javascript" >
+            $(function() {
+                $('#sc').datagrid( {
+                    pagination : true,
+                    pageList : [ 2, 4, 6, 8 ],
+                    pageSize : 6,
+                    idFiled : 'chcId',
+                     fitColumns:true,
+                    singleSelect : true,
+                    toolbar : [{
+                            iconCls: 'icon-add',
+                            text:'新增',
+                            handler : function(){
+                                parent.openTab("销售机会新增",'salChance/toAdd');
+                            }
+                        },'-',{
+                        iconCls : 'icon-edit',
+                        text : '编辑',
+                        handler  : function() {
+                            //获得被选中的行
+                            var row = $('#sc').datagrid("getSelected");
+                            if (!row) {
+                                $.messager.alert('警告', "请选择要修改的行");
+                                return;
+                            }
+                            //获取选中的行的chcId
+                            var chcId = row.chcId;
+                            parent.openTab('编辑销售机会','salChance/toEdit?chcId='+chcId,'icon-edit',true);
+                        }
+                    }, '-', {
+                        iconCls : 'icon-remove',
+                        text : '删除',
+                        handler : function() {
+                            //获得被选中的行
+                            var row = $('#sc').datagrid("getSelected");
+                            if (!row) {
+                                $.messager.alert('警告', "请选择要删除的行");
+                                return;
+                            }
+                            //获取选中的行的chcId
+                            var chcId = row.chcId;
+                            var url = "salChance/toDel?chcId=" + chcId;
+                            $.messager.confirm('确认', '您确认想要删除记录吗？？', function(r) {
+                                if (r){
+                                    $.ajax({
+                                        dataType:'json',
+                                        url:url,
+                                        success:function(data){
+                                            if(1==data){
+                                                $.messager.alert('提示','删除成功');
+//                                                var ind=$('#sc').datagrid("getRowIndex",chcId);
+//                                                $('#sc').datagrid("deleteRow",ind);
+                                                window.location.reload();
+                                            }else{
+                                                $.messager.alert('警告','销售机会删除失败,请与管理员联系');
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    } ],
+                    url : 'salChance/list',
+                    columns : [ [ {
+                        field : 'chcId',
+                        width :'12%',
+                        title:'编号'
+                    }, {
+                        field : 'chcCustName',
+                        width :'18%',
+                        title:'客户名称'
+                    }, {
+                        field : 'chcTitle',
+                        width :'20%',
+                        title:'概要'
+                    }, {
+                        field : 'chcLinkman',
+                        width :'12%',
+                        title:'联系人'
+                    }, {
+                        field : 'chcTel',
+                        width :'18%',
+                        title:'联系人电话'
+                    }, {
+                        field : 'chcCreateDate',
+                        width :'20%',
+                        title:'创建时间'
+                    } ] ]
+                });
+                $("#listBtn").click(function() {
+                    //获取查询文本框的值
+                    var formData = {
+                        chcCustName:$("#chcCustName").val(),
+                        chcTitle:$("#chcTitle").val(),
+                        chcLinkman:$("#chcLinkman").val(),
+                    }
+                    $('#sc').datagrid( {
+                        //在请求远程数据的时候发送额外的参数(dictName)
+                        queryParams : formData
+                    });
+                    //终止默认行为
+                    return false;
+                });
+            });
 
-    <%@include file="/common/button.jsp" %>
+        </script>
 
+        <%@include file="/common/button.jsp" %>
 </body>
 
 </html>

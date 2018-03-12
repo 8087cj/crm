@@ -16,8 +16,8 @@ public class SalChanceBizImpl implements ISalChanceBiz {
     private SalChanceMapper salChanceMapper;
 
     @Override
-    public void deletSalChancee(Long chcId) {
-        salChanceMapper.deleteByPrimaryKey(chcId);
+    public int deletSalChancee(Long chcId) {
+       return salChanceMapper.deleteByPrimaryKey(chcId);
     }
 
     @Override

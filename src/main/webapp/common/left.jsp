@@ -24,7 +24,7 @@
                 <div id="dropdown-table" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="sale/list.jsp">销售机会管理</a>
+                            <li><a href="/salChance/toList">销售机会管理</a>
                             </li>
                             <li><a href="sale/dev.jsp">客户开发计划</a>
                             </li>

@@ -12,8 +12,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Fonts -->
-<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+
 <!-- CSS Libs -->
 <link rel="stylesheet" type="text/css" href="/lib/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/lib/css/font-awesome.min.css">
@@ -27,6 +26,16 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <link rel="stylesheet" type="text/css" href="/css/themes/flat-blue.css">
 <link rel="stylesheet" type="text/css" href="/css/style2.css">
+
+<!-- 加载Easyui -->
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.5.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.5.1/themes/icon.css">
+
+<script type="text/javascript" src="/js/jquery-easyui-1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.5.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.5.1/index.js"></script>
+<script type="text/javascript" src="/js/contextPath.jsp"></script>
+<script type="text/javascript" src="/js/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"></script>
 
 
 
