@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -24,6 +26,8 @@ public class SysUserBizImplTest extends  BaseTest{
 
     @Test
     public void loadSysUser() throws Exception {
+        String str=new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
+        System.out.println(str);
     }
 
     @Test

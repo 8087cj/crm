@@ -56,7 +56,7 @@
                                         &nbsp;客户名称:<input id="chcCustName2"/>
                                         &nbsp;概要:<input id="chcTitle2"/>
                                         &nbsp;联系人:<input size="20" id="chcLinkman2"/>
-                                        &nbsp;&nbsp;<button class="common_button" onclick="reload();" id="listBtn2">查询</button>
+                                        &nbsp;&nbsp;<button class="common_button" id="listBtn2">查询</button>
                                     </div>
 
                                     <a  onclick="openPlanAddDialog()" class="easyui-linkbutton"  iconCls="icon-add" plain="true">制定计划</a>

@@ -60,7 +60,7 @@
                                         &nbsp;客户名称:<input id="chcCustName"/>
                                         &nbsp;概要:<input id="chcTitle"/>
                                         &nbsp;联系人:<input size="20" id="chcLinkman"/>
-                                        &nbsp;&nbsp;<button class="common_button" onclick="reload();" id="listBtn">查询</button>
+                                        &nbsp;&nbsp;<button class="common_button" id="listBtn">查询</button>
                                     </div>
 
                                     <a  onclick="openSalAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>

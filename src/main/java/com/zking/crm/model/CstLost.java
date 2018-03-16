@@ -1,5 +1,7 @@
 package com.zking.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,9 +16,11 @@ public class CstLost implements Serializable {
 
     private String lstCustManagerName;
 
-    private Date lstLastOrderDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String lstLastOrderDate;
 
-    private Date lstLostDate;
+    @JsonFormat(pattern = "yyyy")
+    private String lstLostDate;
 
     private String lstDelay;
 
@@ -24,7 +28,7 @@ public class CstLost implements Serializable {
 
     private Integer lstStatus;
 
-    public CstLost(Long lstId, String lstCustNo, String lstCustName, Long lstCustManagerId, String lstCustManagerName, Date lstLastOrderDate, Date lstLostDate, String lstDelay, String lstReason, Integer lstStatus) {
+    public CstLost(Long lstId, String lstCustNo, String lstCustName, Long lstCustManagerId, String lstCustManagerName, String lstLastOrderDate, String lstLostDate, String lstDelay, String lstReason, Integer lstStatus) {
         this.lstId = lstId;
         this.lstCustNo = lstCustNo;
         this.lstCustName = lstCustName;
@@ -81,19 +85,19 @@ public class CstLost implements Serializable {
         this.lstCustManagerName = lstCustManagerName;
     }
 
-    public Date getLstLastOrderDate() {
+    public String getLstLastOrderDate() {
         return lstLastOrderDate;
     }
 
-    public void setLstLastOrderDate(Date lstLastOrderDate) {
+    public void setLstLastOrderDate(String lstLastOrderDate) {
         this.lstLastOrderDate = lstLastOrderDate;
     }
 
-    public Date getLstLostDate() {
+    public String getLstLostDate() {
         return lstLostDate;
     }
 
-    public void setLstLostDate(Date lstLostDate) {
+    public void setLstLostDate(String lstLostDate) {
         this.lstLostDate = lstLostDate;
     }
 

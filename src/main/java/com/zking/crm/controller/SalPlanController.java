@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -118,20 +120,19 @@ public class SalPlanController {
         salChance.setChcStatus(3);
         salChanceBiz.updateStatus(salChance);
 
-
         //根据销售机会中相应信息（包括客户名称、联系人和联系人电话）自动创建客户记录
 //        --客户信息表：cst_customer
 //        客户名称，cust_name
 //        客户经理ID，cust_manager_id
 //        客户经理名字，cust_manager_name
 
-
         int count = cstCustomerBiz.getCstCustomerCount();
         int cc = count + 1;
         SalChance sc = salChanceBiz.loadSalChanceTop(salChance.getChcId());
 
         CstCustomer cstCustomer = new CstCustomer();
-        cstCustomer.setCustNo("KH_yyyyMMdd_0000" + cc);
+        String str=new SimpleDateFormat("yyyyMMdd").format(new Date(System.currentTimeMillis()));
+        cstCustomer.setCustNo("KH_"+str+"_0000" + cc);
         cstCustomer.setCustName(sc.getChcCustName());
         cstCustomer.setCustManagerId(sc.getChcCreateId());
         cstCustomer.setCustManagerName(sc.getChcCreateBy());
@@ -149,7 +150,6 @@ public class SalPlanController {
         cstLinkman.setLkmName(sc.getChcLinkman());
         cstLinkman.setLkmTel(sc.getChcTel());
         cstLinkmanBiz.addCstLinkman(cstLinkman);
-
 
         return 1;
     }

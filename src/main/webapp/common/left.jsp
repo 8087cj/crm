@@ -78,7 +78,7 @@
                             <li><a href="rept/contr.jsp">客户贡献分析</a></li>
                             <li><a href="rept/cons.jsp">客户构成分析</a></li>
                             <li><a href="rept/ser.jsp">客户服务分析</a></li>
-                            <li><a href="rept/lost.jsp">客户流失分析</a></li>
+                            <li><a href="/serviceReport/toLost">客户流失分析</a></li>
                         </ul>
                     </div>
                 </div>

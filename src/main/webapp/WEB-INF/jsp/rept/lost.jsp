@@ -47,61 +47,12 @@
                         <div class="card">
 
                             <!--链接start-->
-                            <div class="button_bar">
-                                <button class="common_button" onclick="help('');">帮助</button>
-                                <button class="common_button" onclick="reload();">查询</button>
-                            </div>
-                            <table class="query_form_table" border="0" cellPadding="3" cellSpacing="0">
-                                <tr>
-                                    <th>客户名称</th>
-                                    <td><input type="text" name="item.lstCustName" value=""></td>
-                                    <th>客户经理</th>
-                                    <td><input type="text" name="item.lstCustManagerName" value=""></td>
-                                </tr>
-                            </table><br />
-                            <table class="data_list_table">
-                                <tr>
-                                    <th height="28">编号</th>
-                                    <th height="28">年份</th>
-                                    <th height="28">客户</th>
-                                    <th height="28">客户经理</th>
-                                    <th height="28">流失原因</th>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number" height="27">1</td>
-                                    <td class="list_data_text" height="27">2006</td>
-                                    <td class="list_data_text" height="27">大空纶纺</td>
-                                    <td class="list_data_text" height="27">小满</td>
-                                    <td class="list_data_ltext" height="27">客户厂址迁移</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">2</td>
-                                    <td class="list_data_text">2006</td>
-                                    <td class="list_data_text">星星广告</td>
-                                    <td class="list_data_text">郭小美</td>
-                                    <td class="list_data_ltext">客户公司被收购</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">3</td>
-                                    <td class="list_data_text">2005</td>
-                                    <td class="list_data_text">和满记餐饮</td>
-                                    <td class="list_data_text">周结论</td>
-                                    <td class="list_data_ltext">没有采购需求</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="7" class="pager">
-                                        <div class="pager">
-                                            共59条记录 每页<input value="10" size="2" />条
-                                            第<input value="1" size="2"/>页/共5页
-                                            <a href="#">第一页</a>
-                                            <a href="#">上一页</a>
-                                            <a href="#">下一页</a>
-                                            <a href="#">最后一页</a>
-                                            转到<input value="1" size="2" />页
-                                            <button width="20" onclick="reload();">GO</button>
-                                        </div>
-                                    </th>
-                                </tr>
+                            <table class="data_list_table" id="rl">
+                                    <div>
+                                        &nbsp;客户名称:<input id="lstCustName"/>
+                                        &nbsp;客户经理:<input size="20" id="lstCustManagerName"/>
+                                        &nbsp;&nbsp;<button class="common_button" id="lostBtn">查询</button>
+                                    </div>
 
                             </table>
                             <!--链接end-->
@@ -120,7 +71,54 @@
     </footer>
     <div>
 
-    <%@include file="/common/button.jsp" %>
+        <script type="text/javascript" >
+            $(function() {
+                $('#rl').datagrid( {
+                    pagination : true,
+                    pageList : [ 2, 4, 6, 8 ],
+                    pageSize : 6,
+                    idFiled : 'lstId',
+                    fitColumns:true,
+                    singleSelect : true,
+                    url : 'serviceReport/lost',
+                    columns : [ [ {
+                        field : 'lstId',
+                        width :'12%',
+                        title:'编号'
+                    }, {
+                        field : 'lstLostDate',
+                        width :'12%',
+                        title:'年份',
+                        formatter:function (val,rec) {
+                            return val.substr(0,4);
+                        }
+                    }, {
+                        field : 'lstCustName',
+                        width :'20%',
+                        title:'客户'
+                    }, {
+                        field : 'lstCustManagerName',
+                        width :'20%',
+                        title:'客户经理'
+                    }, {
+                        field : 'lstReason',
+                        width :'36%',
+                        title:'流失原因'
+                    } ] ]
+                });
+                $("#lostBtn").click(function () {
+                    var formData={
+                        lstCustName:$("#lstCustName").val(),
+                        lstCustManagerName:$("#lstCustManagerName").val()
+                    };
+                    $("#rl").datagrid({queryParams:formData});
+                    return false;
+                });
+            });
+
+        </script>
+
+            <%@include file="/common/button.jsp" %>
 
 </body>
 
