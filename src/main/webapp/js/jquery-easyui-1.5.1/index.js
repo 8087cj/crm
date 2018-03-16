@@ -53,3 +53,19 @@ function openTab(text, path) {
         });
     }
 }
+
+//刷新
+function refresh() {
+    var tab = $('#tt').tabs('getTab','销售机会管理');
+    // 获取选择的面板
+    tab.panel('refresh');
+}
+
+//关闭当前的tab
+function removePanel(){
+    var tab = $('#tt').tabs('getSelected');
+    if (tab){
+        var index = $('#tt').tabs('getTabIndex', tab);
+        $('#tt').tabs('close', index);
+    }
+}

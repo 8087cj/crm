@@ -1,14 +1,15 @@
 package com.zking.crm.controller;
 
 import com.zking.crm.biz.ISalChanceBiz;
+import com.zking.crm.biz.ISysUserBiz;
 import com.zking.crm.model.SalChance;
+import com.zking.crm.model.SysUser;
 import com.zking.crm.util.JsonUtils;
 import com.zking.crm.util.PageBean;
 import com.zking.crm.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -27,15 +29,8 @@ public class SalChanceController {
     @Autowired
     private ISalChanceBiz salChanceBiz;
 
-    @ModelAttribute
-    public void init(Model model, HttpSession session) {
-        //1.初始化命令对象
-        SalChance salChance=new SalChance();
-        model.addAttribute("salChance",salChance);
-
-        //2.初始化动态数据
-
-    }
+    @Autowired
+    private ISysUserBiz sysUserBiz;
 
     @RequestMapping("/toList")
     public String toList(Model model) {
@@ -43,12 +38,12 @@ public class SalChanceController {
     }
 
     @RequestMapping("/list")
-    public void list(Model model, SalChance salChance, HttpSession session, HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
+    public void list(Model model, SalChance salChance, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PageBean pageBean = new PageBean();
         pageBean.setRequest(request);
         List<SalChance> salChanceList = salChanceBiz.listSalChance(salChance, pageBean);
-        request.setAttribute("salChanceList",salChanceList);
-        ResponseData responseData=new ResponseData();
+        request.setAttribute("salChanceList", salChanceList);
+        ResponseData responseData = new ResponseData();
         responseData.setTotal(pageBean.getTotalRecord());
         responseData.setRows(salChanceList);
 
@@ -58,34 +53,56 @@ public class SalChanceController {
 
     }
 
-    @RequestMapping("/toAdd")
-    public String toAdd(Model model) {
-        return "sale/add";
-    }
-
     @RequestMapping("/add")
-    public void add(Model model,SalChance salChance) {
+    @ResponseBody
+    public int add(Model model, SalChance salChance, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         salChanceBiz.addSalChance(salChance);
-    }
-
-    @RequestMapping("/toEdit")
-    public String toEdit(Model model,SalChance salChance) {
-        SalChance sc = salChanceBiz.loadSalChanceTop(salChance.getChcId());
-
-        return "sale/edit";
+        return 1;
     }
 
     @RequestMapping("/edit")
-    public void edit(Model model,SalChance salChance) {
+    @ResponseBody
+    public int edit(Model model, SalChance salChance, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         salChanceBiz.editSalChance(salChance);
+        return 1;
     }
 
     @RequestMapping("/toDel")
     @ResponseBody
-    public int toDel(Model model,SalChance salChance) {
-        return  salChanceBiz.deletSalChancee(salChance.getChcId());
+    public int toDel(Model model, SalChance salChance) {
+        return salChanceBiz.delSalChance(salChance.getChcId());
     }
 
+    @RequestMapping("/dispatch")
+    @ResponseBody
+    public int dispatch(Model model, SalChance salChance, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+//        Timestamp tt = new Timestamp(System.currentTimeMillis());
+//        salChance.setChcDueDate(tt);
+        System.out.println("chcDueId:" + salChance.getChcDueId());
+        SysUser user = sysUserBiz.loadSysUser(salChance.getChcDueId());
+        salChance.setChcDueId(user.getUsrId());
+        salChance.setChcDueTo(user.getUsrName());
+        int i = salChanceBiz.dispatch(salChance);
+        System.out.println("i: " + i);
+        int n = 0;
+        if (i == 1) {
+            salChance.setChcStatus(2);
+            salChanceBiz.updateStatus(salChance);
+            n = 1;
+        }
+        return n;
+    }
 
+    @RequestMapping("/toDispatch")
+    @ResponseBody
+    public List<SysUser> toDispatch(Model model, SysUser sysUser, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        sysUser.setUsrRoleId(3l);
+        List<SysUser> sysUsers = sysUserBiz.listManager(sysUser);
+        return sysUsers;
+    }
 
 }

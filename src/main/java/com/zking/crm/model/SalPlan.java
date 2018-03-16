@@ -1,5 +1,7 @@
 package com.zking.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,18 +10,26 @@ public class SalPlan implements Serializable {
 
     private Long plaChcId;
 
-    private Date plaDate;
+    @JsonFormat(pattern ="yyyy-MM-dd")
+    private String plaDate;
 
     private String plaTodo;
 
     private String plaResult;
 
-    public SalPlan(Long plaId, Long plaChcId, Date plaDate, String plaTodo, String plaResult) {
+    public SalPlan(Long plaId, Long plaChcId, String plaDate, String plaTodo, String plaResult) {
         this.plaId = plaId;
         this.plaChcId = plaChcId;
         this.plaDate = plaDate;
         this.plaTodo = plaTodo;
         this.plaResult = plaResult;
+    }
+
+    public SalPlan(Long plaId, Long plaChcId, String plaDate, String plaTodo) {
+        this.plaId = plaId;
+        this.plaChcId = plaChcId;
+        this.plaDate = plaDate;
+        this.plaTodo = plaTodo;
     }
 
     public SalPlan() {
@@ -42,11 +52,11 @@ public class SalPlan implements Serializable {
         this.plaChcId = plaChcId;
     }
 
-    public Date getPlaDate() {
+    public String getPlaDate() {
         return plaDate;
     }
 
-    public void setPlaDate(Date plaDate) {
+    public void setPlaDate(String plaDate) {
         this.plaDate = plaDate;
     }
 

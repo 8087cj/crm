@@ -74,66 +74,78 @@
         <!--</table>-->
 
         <!--其他-->
-        <table schema="" tableName="product" domainObjectName="Product"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
+        <!--<table schema="" tableName="product" domainObjectName="Product"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
 
-        <table schema="" tableName="storages" domainObjectName="Storages"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
+        <!--<table schema="" tableName="storages" domainObjectName="Storages"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
 
-        <table schema="" tableName="orders" domainObjectName="Orders"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
+        <!--<table schema="" tableName="orders" domainObjectName="Orders"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
 
-        <table schema="" tableName="orders_line" domainObjectName="OrdersLine"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
+        <!--<table schema="" tableName="orders_line" domainObjectName="OrdersLine"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
 
-        <!--基础数据-->
-        <table schema="" tableName="bas_dict" domainObjectName="BasDict"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
+        <!--&lt;!&ndash;基础数据&ndash;&gt;-->
+        <!--<table schema="" tableName="bas_dict" domainObjectName="BasDict"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
 
         <!--服务管理-->
-        <table schema="" tableName="cst_service" domainObjectName="CstService"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
+        <!--<table schema="" tableName="cst_service" domainObjectName="CstService"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+
+        <!--&lt;!&ndash;营销管理&ndash;&gt;-->
+        <!--<table schema="" tableName="sal_chance" domainObjectName="SalChance"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+
+        <!--<table schema="" tableName="sal_plan" domainObjectName="SalPlan"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+
+        <!--&lt;!&ndash;客户管理&ndash;&gt;-->
+        <!--<table schema="" tableName="cst_customer" domainObjectName="CstCustomer"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+
+        <!--<table schema="" tableName="cst_linkman" domainObjectName="CstLinkman"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+
+        <!--<table schema="" tableName="cst_activity" domainObjectName="CstActivity"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+
+        <!--<table schema="" tableName="cst_lost" domainObjectName="CstLost"-->
+               <!--enableCountByExample="false" enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--</table>-->
+
+
+        <!--权限管理-->
+        <table schema="" tableName="sys_user" domainObjectName="SysUser"
+        enableCountByExample="false" enableDeleteByExample="false"
+        enableSelectByExample="false" enableUpdateByExample="false">
         </table>
 
-        <!--营销管理-->
-        <table schema="" tableName="sal_chance" domainObjectName="SalChance"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
-
-        <table schema="" tableName="sal_plan" domainObjectName="SalPlan"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
-
-        <!--客户管理-->
-        <table schema="" tableName="cst_customer" domainObjectName="CstCustomer"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
-
-        <table schema="" tableName="cst_linkman" domainObjectName="CstLinkman"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
-
-        <table schema="" tableName="cst_activity" domainObjectName="CstActivity"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false">
-        </table>
-
-        <table schema="" tableName="cst_lost" domainObjectName="CstLost"
+        <table schema="" tableName="sys_role" domainObjectName="SysRole"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false">
         </table>

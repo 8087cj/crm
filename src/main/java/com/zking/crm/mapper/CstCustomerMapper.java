@@ -16,4 +16,7 @@ public interface CstCustomerMapper {
     int updateByPrimaryKeySelective(CstCustomer record);
 
     int updateByPrimaryKey(CstCustomer record);
+
+    int getCstCustomerCount();
+
 }

@@ -20,6 +20,7 @@ public class InputController {
     @RequestMapping("/admin")
     public String admin() {
         return "admin";
+//        return "cust/edit";
     }
 
     @RequestMapping("/base")

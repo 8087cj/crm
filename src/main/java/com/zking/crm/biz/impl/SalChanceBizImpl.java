@@ -16,13 +16,13 @@ public class SalChanceBizImpl implements ISalChanceBiz {
     private SalChanceMapper salChanceMapper;
 
     @Override
-    public int deletSalChancee(Long chcId) {
-       return salChanceMapper.deleteByPrimaryKey(chcId);
+    public int delSalChance(Long chcId) {
+        return salChanceMapper.deleteByPrimaryKey(chcId);
     }
 
     @Override
     public void addSalChance(SalChance record) {
-        salChanceMapper.insertSelective(record);
+         salChanceMapper.insertSelective(record);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class SalChanceBizImpl implements ISalChanceBiz {
 
     @Override
     public void editSalChance(SalChance record) {
-        salChanceMapper.updateByPrimaryKeySelective(record);
+          salChanceMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SalChanceBizImpl implements ISalChanceBiz {
 
     @Override
     public void updateStatus(SalChance record) {
-        salChanceMapper.updateStatus(record);
+          salChanceMapper.updateStatus(record);
     }
 
     @Override

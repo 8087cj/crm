@@ -24,8 +24,8 @@ public class SalChanceBizImplTest extends BaseTest{
     }
 
     @Test
-    public int deletSalChancee() throws Exception {
-       return salChanceBiz.deletSalChancee(4l);
+    public void delSalChance() throws Exception {
+        salChanceBiz.delSalChance(4l);
     }
 
     @Test
@@ -64,6 +64,7 @@ public class SalChanceBizImplTest extends BaseTest{
 
     @Test
     public void listSalChance() throws Exception {
+        salChance.setChcStatus(1);
         List<SalChance> salChances = salChanceBiz.listSalChance(salChance, null);
         for(SalChance sc:salChances){
             System.out.println(sc);

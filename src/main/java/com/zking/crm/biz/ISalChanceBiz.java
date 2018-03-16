@@ -6,7 +6,8 @@ import com.zking.crm.util.PageBean;
 import java.util.List;
 
 public interface ISalChanceBiz {
-    int deletSalChancee(Long chcId);
+
+    int delSalChance(Long chcId);
 
     void addSalChance(SalChance record);
 

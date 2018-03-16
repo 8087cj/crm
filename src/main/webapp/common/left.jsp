@@ -26,7 +26,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/salChance/toList">销售机会管理</a>
                             </li>
-                            <li><a href="sale/dev.jsp">客户开发计划</a>
+                            <li><a href="/salPlan/toDev">客户开发计划</a>
                             </li>
                         </ul>
                     </div>

@@ -40,6 +40,13 @@
     from cst_customer
     where cust_no = #{custNo,jdbcType=CHAR}
   </select>
+
+  <select id="getCstCustomerCount" resultType="int" >
+    select
+    count(cust_no)
+    from cst_customer
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from cst_customer
     where cust_no = #{custNo,jdbcType=CHAR}
@@ -62,7 +69,7 @@
       #{custBank,jdbcType=VARCHAR}, #{custBankAccount,jdbcType=VARCHAR}, #{custLocalTaxNo,jdbcType=VARCHAR}, 
       #{custNationalTaxNo,jdbcType=VARCHAR}, #{custStatus,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zking.crm.model.CstCustomer" >
+  <insert id="insertSelective" parameterType="com.zking.crm.model.CstCustomer" keyProperty="id" useGeneratedKeys="true">
     insert into cst_customer
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="custNo != null" >

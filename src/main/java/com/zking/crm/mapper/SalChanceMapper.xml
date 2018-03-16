@@ -13,10 +13,10 @@
       <arg column="chc_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="chc_create_id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="chc_create_by" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="chc_create_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="chc_create_date" jdbcType="TIMESTAMP" javaType="java.lang.String" />
       <arg column="chc_due_id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="chc_due_to" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="chc_due_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="chc_due_date" jdbcType="TIMESTAMP" javaType="java.lang.String" />
       <arg column="chc_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
@@ -31,10 +31,10 @@
       <result column="chc_desc" property="chcDesc" javaType="java.lang.String" />
       <result column="chc_create_id" property="chcCreateId" javaType="java.lang.Long" />
       <result column="chc_create_by" property="chcCreateBy" javaType="java.lang.String" />
-      <result column="chc_create_date" property="chcCreateDate" javaType="java.util.Date" />
+      <result column="chc_create_date" property="chcCreateDate" javaType="java.lang.String" />
       <result column="chc_due_id" property="chcDueId" javaType="java.lang.Long" />
       <result column="chc_due_to" property="chcDueTo" javaType="java.lang.String" />
-      <result column="chc_due_date" property="chcDueDate" javaType="java.util.Date" />
+      <result column="chc_due_date" property="chcDueDate" javaType="java.lang.String" />
       <result column="chc_status" property="chcStatus" javaType="java.lang.Integer" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -53,27 +53,32 @@
     where chc_id = #{chcId,jdbcType=BIGINT}
   </select>
 
-  <select id="loadSalChanceTop" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="loadSalChanceTop" resultMap="rowSalChance" parameterType="java.lang.Long" >
     select
-    <include refid="Base_Column_List2" />
+    chc_id, chc_cust_name, chc_linkman, chc_tel, chc_create_id, chc_create_by
     from sal_chance
     where chc_id = #{chcId,jdbcType=BIGINT}
   </select>
+
 
   <select id="listSalChance" resultMap="rowSalChance" parameterType="com.zking.crm.model.SalChance" >
     select
     <include refid="Base_Column_List2" />
     from sal_chance
     where 1=1
+    <if test="chcStatus != null and ''!=chcStatus" >
+      and chc_status!=#{chcStatus,jdbcType=INTEGER}
+    </if>
     <if test="chcCustName != null and ''!=chcCustName" >
       and chc_cust_name like concat('%', #{chcCustName,jdbcType=VARCHAR},'%')
     </if>
     <if test="chcTitle != null and ''!=chcTitle" >
-      chc_title like concat('%', #{chcTitle,jdbcType=VARCHAR},'%')
+      and chc_title like concat('%', #{chcTitle,jdbcType=VARCHAR},'%')
     </if>
     <if test="chcLinkman != null and ''!=chcLinkman" >
-      chc_linkman like concat('%', #{chcLinkman,jdbcType=VARCHAR},'%')
+      and chc_linkman like concat('%', #{chcLinkman,jdbcType=VARCHAR},'%')
     </if>
+    order by chc_id DESC
   </select>
 
   <select id="listAllSalChance" resultMap="rowSalChance" parameterType="com.zking.crm.model.SalChance" >
@@ -85,11 +90,12 @@
       and chc_cust_name like concat('%', #{chcCustName,jdbcType=VARCHAR},'%')
     </if>
     <if test="chcTitle != null and ''!=chcTitle" >
-      chc_title like concat('%', #{chcTitle,jdbcType=VARCHAR},'%')
+      and chc_title like concat('%', #{chcTitle,jdbcType=VARCHAR},'%')
     </if>
     <if test="chcLinkman != null and ''!=chcLinkman" >
-      chc_linkman like concat('%', #{chcLinkman,jdbcType=VARCHAR},'%')
+      and chc_linkman like concat('%', #{chcLinkman,jdbcType=VARCHAR},'%')
     </if>
+     order by chc_id DESC
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
@@ -143,9 +149,6 @@
       <if test="chcCreateBy != null" >
         chc_create_by,
       </if>
-      <if test="chcCreateDate != null" >
-        chc_create_date,
-      </if>
       <if test="chcDueId != null" >
         chc_due_id,
       </if>
@@ -189,9 +192,6 @@
       </if>
       <if test="chcCreateBy != null" >
         #{chcCreateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="chcCreateDate != null" >
-        #{chcCreateDate,jdbcType=TIMESTAMP},
       </if>
       <if test="chcDueId != null" >
         #{chcDueId,jdbcType=BIGINT},
@@ -237,9 +237,6 @@
       <if test="chcCreateBy != null" >
         chc_create_by = #{chcCreateBy,jdbcType=VARCHAR},
       </if>
-      <if test="chcCreateDate != null" >
-        chc_create_date = #{chcCreateDate,jdbcType=TIMESTAMP},
-      </if>
       <if test="chcDueId != null" >
         chc_due_id = #{chcDueId,jdbcType=BIGINT},
       </if>
@@ -278,7 +275,7 @@
     set
     chc_due_id = #{chcDueId,jdbcType=BIGINT},
     chc_due_to = #{chcDueTo,jdbcType=VARCHAR},
-    chc_due_date = #{chcDueDate,jdbcType=TIMESTAMP},
+    chc_due_date = #{chcDueDate,jdbcType=TIMESTAMP}
     where chc_id = #{chcId,jdbcType=BIGINT}
   </update>
   <update id="updateStatus" parameterType="com.zking.crm.model.SalChance" >

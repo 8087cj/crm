@@ -1,5 +1,7 @@
 package com.zking.crm.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,17 +26,20 @@ public class SalChance implements Serializable {
 
     private String chcCreateBy;
 
-    private Date chcCreateDate;
+    //年月日
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String chcCreateDate;
 
     private Long chcDueId;
 
     private String chcDueTo;
 
-    private Date chcDueDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private String chcDueDate;
 
     private Integer chcStatus;
 
-    public SalChance(Long chcId, String chcSource, String chcCustName, String chcTitle, Integer chcRate, String chcLinkman, String chcTel, String chcDesc, Long chcCreateId, String chcCreateBy, Date chcCreateDate, Long chcDueId, String chcDueTo, Date chcDueDate, Integer chcStatus) {
+    public SalChance(Long chcId, String chcSource, String chcCustName, String chcTitle, Integer chcRate, String chcLinkman, String chcTel, String chcDesc, Long chcCreateId, String chcCreateBy, String chcCreateDate, Long chcDueId, String chcDueTo, String chcDueDate, Integer chcStatus) {
         this.chcId = chcId;
         this.chcSource = chcSource;
         this.chcCustName = chcCustName;
@@ -136,13 +141,6 @@ public class SalChance implements Serializable {
         this.chcCreateBy = chcCreateBy;
     }
 
-    public Date getChcCreateDate() {
-        return chcCreateDate;
-    }
-
-    public void setChcCreateDate(Date chcCreateDate) {
-        this.chcCreateDate = chcCreateDate;
-    }
 
     public Long getChcDueId() {
         return chcDueId;
@@ -160,11 +158,19 @@ public class SalChance implements Serializable {
         this.chcDueTo = chcDueTo;
     }
 
-    public Date getChcDueDate() {
+    public String getChcCreateDate() {
+        return chcCreateDate;
+    }
+
+    public void setChcCreateDate(String chcCreateDate) {
+        this.chcCreateDate = chcCreateDate;
+    }
+
+    public String getChcDueDate() {
         return chcDueDate;
     }
 
-    public void setChcDueDate(Date chcDueDate) {
+    public void setChcDueDate(String chcDueDate) {
         this.chcDueDate = chcDueDate;
     }
 

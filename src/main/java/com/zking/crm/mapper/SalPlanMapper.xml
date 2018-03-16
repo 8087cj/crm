@@ -5,10 +5,17 @@
     <constructor >
       <idArg column="pla_id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="pla_chc_id" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="pla_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="pla_date" jdbcType="TIMESTAMP" javaType="java.lang.String" />
       <arg column="pla_todo" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pla_result" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
+  </resultMap>
+  <resultMap id="rowSalPlan" type="com.zking.crm.model.SalPlan" >
+      <id column="pla_id" property="plaId" javaType="java.lang.Long" />
+      <result column="pla_chc_id" property="plaChcId" javaType="java.lang.Long" />
+      <result column="pla_date" property="plaDate" javaType="java.lang.String" />
+      <result column="pla_todo" property="plaTodo" javaType="java.lang.String" />
+      <result column="pla_result" property="plaResult" javaType="java.lang.String" />
   </resultMap>
   <sql id="Base_Column_List" >
     pla_id, pla_chc_id, pla_date, pla_todo, pla_result
@@ -18,6 +25,12 @@
     <include refid="Base_Column_List" />
     from sal_plan
     where pla_id = #{plaId,jdbcType=BIGINT}
+  </select>
+  <select id="listByChcId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from sal_plan
+    where pla_chc_id = #{plaChcId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from sal_plan
@@ -90,6 +103,12 @@
       pla_date = #{plaDate,jdbcType=TIMESTAMP},
       pla_todo = #{plaTodo,jdbcType=VARCHAR},
       pla_result = #{plaResult,jdbcType=VARCHAR}
+    where pla_id = #{plaId,jdbcType=BIGINT}
+  </update>
+
+  <update id="plan" parameterType="com.zking.crm.model.SalPlan" >
+    update sal_plan
+    set pla_result = #{plaResult,jdbcType=VARCHAR}
     where pla_id = #{plaId,jdbcType=BIGINT}
   </update>
 </mapper>
