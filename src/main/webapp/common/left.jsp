@@ -75,9 +75,9 @@
                 <div id="dropdown-example" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="rept/contr.jsp">客户贡献分析</a></li>
-                            <li><a href="rept/cons.jsp">客户构成分析</a></li>
-                            <li><a href="rept/ser.jsp">客户服务分析</a></li>
+                            <li><a href="/serviceReport/toContr">客户贡献分析</a></li>
+                            <li><a href="/serviceReport/toCons">客户构成分析</a></li>
+                            <li><a href="/serviceReport/toSer">客户服务分析</a></li>
                             <li><a href="/serviceReport/toLost">客户流失分析</a></li>
                         </ul>
                     </div>

@@ -8,13 +8,13 @@ public class Orders implements Serializable {
 
     private String odrCustomer;
 
-    private Date odrDate;
+    private String odrDate;
 
     private String odrAddr;
 
     private Boolean odrStatus;
 
-    public Orders(Long odrId, String odrCustomer, Date odrDate, String odrAddr, Boolean odrStatus) {
+    public Orders(Long odrId, String odrCustomer, String odrDate, String odrAddr, Boolean odrStatus) {
         this.odrId = odrId;
         this.odrCustomer = odrCustomer;
         this.odrDate = odrDate;
@@ -42,11 +42,11 @@ public class Orders implements Serializable {
         this.odrCustomer = odrCustomer;
     }
 
-    public Date getOdrDate() {
+    public String getOdrDate() {
         return odrDate;
     }
 
-    public void setOdrDate(Date odrDate) {
+    public void setOdrDate(String odrDate) {
         this.odrDate = odrDate;
     }
 

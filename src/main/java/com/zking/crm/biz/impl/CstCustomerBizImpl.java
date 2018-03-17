@@ -6,6 +6,8 @@ import com.zking.crm.model.CstCustomer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CstCustomerBizImpl implements ICstCustomerBiz {
 
@@ -20,5 +22,10 @@ public class CstCustomerBizImpl implements ICstCustomerBiz {
     @Override
     public int getCstCustomerCount() {
         return cstCustomerMapper.getCstCustomerCount();
+    }
+
+    @Override
+    public List<CstCustomer> listCstCustomerNameAndCount(CstCustomer record) {
+        return cstCustomerMapper.listCstCustomerNameAndCount(record);
     }
 }

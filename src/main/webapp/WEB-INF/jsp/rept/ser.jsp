@@ -48,52 +48,11 @@
                             <div class="card">
 
                                 <!--链接start-->
-                                <div class="button_bar">
-                                    <button class="common_button" onclick="help('');">帮助</button>
-                                    <button class="common_button" onclick="reload();">查询</button>
-                                </div>
-                                <table class="query_form_table">
-                                    <tr>
-                                        <th>年份</th>
-                                        <td>
-                                            <select>
-                                                <option>全部</option>
-                                                <option>2005</option>
-                                                <option>2006</option>
-                                                <option>2007</option>
-                                                <option>2008</option>
-                                                <option>2009</option>
-                                                <option>2010</option>
-                                            </select>
-                                        </td>
-                                        <th>&nbsp;</th>
-                                        <td>
-                                            &nbsp;
-                                        </td>
-                                    </tr>
-                                </table>
-                                <br />
-                                <table class="data_list_table">
-                                    <tr>
-                                        <th>编号</th>
-                                        <th>条目</th>
-                                        <th>服务数量</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="list_data_number">1</td>
-                                        <td class="list_data_text">建议</td>
-                                        <td class="list_data_number">12</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="list_data_number">2</td>
-                                        <td class="list_data_text">咨询</td>
-                                        <td class="list_data_number">26</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="list_data_number">3</td>
-                                        <td class="list_data_text">投诉</td>
-                                        <td class="list_data_number">38</td>
-                                    </tr>
+                                <table class="data_list_table" id="rss">
+                                    <div>
+                                        &nbsp;年份:<input class="easyui-combobox"  id="yy"  panelHeight="auto" value="全部"/>
+                                        &nbsp;&nbsp;<button class="common_button" id="rsBtn">查询</button>
+                                    </div>
                                 </table>
                                 <!--链接end-->
 
@@ -111,7 +70,50 @@
         </footer>
         <div>
 
-    <%@include file="/common/button.jsp" %>
+
+
+        <script type="text/javascript" >
+
+
+
+            $(function() {
+                $('#rss').datagrid( {
+                    url : 'serviceReport/listSvrType',
+                    columns : [ [  {
+                        field : 'svrType',
+                        width :'50%',
+                        title:'条目'
+                    }, {
+                        field : 'svrSatisfy',
+                        width :'50%',
+                        title:'服务数量'
+                    } ] ]
+                });
+
+                $('#rsBtn').click(function () {
+                    //获取查询文本框的值
+                    var createDate=document.getElementById("yy");
+                    var formData = {
+                        svrCreateBy:createDate.value
+                    };
+                    $('#rss').datagrid({
+                        //在请求远程数据的时候发送额外的参数(dictName)
+                        queryParams:formData
+                    });
+                    //终止默认行为
+                    return false;
+                });
+            });
+
+            $('#yy').combobox({
+                url:'serviceReport/listCreateYear',
+                method:'post',
+                valueField:'svrCreateBy',
+                textField:'svrCreateBy'
+            });
+
+        </script>
+
 
 </body>
 

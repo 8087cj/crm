@@ -22,13 +22,13 @@ public class CstService implements Serializable {
 
     private String svrCreateBy;
 
-    private Date svrCreateDate;
+    private String svrCreateDate;
 
     private Long svrDueId;
 
     private String svrDueTo;
 
-    private Date svrDueDate;
+    private String svrDueDate;
 
     private String svrDeal;
 
@@ -36,13 +36,13 @@ public class CstService implements Serializable {
 
     private String svrDealBy;
 
-    private Date svrDealDate;
+    private String svrDealDate;
 
     private String svrResult;
 
     private Integer svrSatisfy;
 
-    public CstService(Long svrId, String svrType, String svrTitle, String svrCustNo, String svrCustName, Integer svrStatus, String svrRequest, Long svrCreateId, String svrCreateBy, Date svrCreateDate, Long svrDueId, String svrDueTo, Date svrDueDate, String svrDeal, Long svrDealId, String svrDealBy, Date svrDealDate, String svrResult, Integer svrSatisfy) {
+    public CstService(Long svrId, String svrType, String svrTitle, String svrCustNo, String svrCustName, Integer svrStatus, String svrRequest, Long svrCreateId, String svrCreateBy, String svrCreateDate, Long svrDueId, String svrDueTo, String svrDueDate, String svrDeal, Long svrDealId, String svrDealBy, String svrDealDate, String svrResult, Integer svrSatisfy) {
         this.svrId = svrId;
         this.svrType = svrType;
         this.svrTitle = svrTitle;
@@ -140,11 +140,11 @@ public class CstService implements Serializable {
         this.svrCreateBy = svrCreateBy;
     }
 
-    public Date getSvrCreateDate() {
+    public String getSvrCreateDate() {
         return svrCreateDate;
     }
 
-    public void setSvrCreateDate(Date svrCreateDate) {
+    public void setSvrCreateDate(String svrCreateDate) {
         this.svrCreateDate = svrCreateDate;
     }
 
@@ -164,11 +164,11 @@ public class CstService implements Serializable {
         this.svrDueTo = svrDueTo;
     }
 
-    public Date getSvrDueDate() {
+    public String getSvrDueDate() {
         return svrDueDate;
     }
 
-    public void setSvrDueDate(Date svrDueDate) {
+    public void setSvrDueDate(String svrDueDate) {
         this.svrDueDate = svrDueDate;
     }
 
@@ -196,11 +196,11 @@ public class CstService implements Serializable {
         this.svrDealBy = svrDealBy;
     }
 
-    public Date getSvrDealDate() {
+    public String getSvrDealDate() {
         return svrDealDate;
     }
 
-    public void setSvrDealDate(Date svrDealDate) {
+    public void setSvrDealDate(String svrDealDate) {
         this.svrDealDate = svrDealDate;
     }
 

@@ -3,6 +3,8 @@ package com.zking.crm.mapper;
 import com.zking.crm.model.OrdersLine;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OrdersLineMapper {
     int deleteByPrimaryKey(Long oddId);
@@ -16,4 +18,5 @@ public interface OrdersLineMapper {
     int updateByPrimaryKeySelective(OrdersLine record);
 
     int updateByPrimaryKey(OrdersLine record);
+
 }

@@ -1,90 +1,112 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zking.crm.mapper.OrdersMapper" >
-  <resultMap id="BaseResultMap" type="com.zking.crm.model.Orders" >
-    <constructor >
-      <idArg column="odr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
-      <arg column="odr_customer" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="odr_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="odr_addr" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="odr_status" jdbcType="BIT" javaType="java.lang.Boolean" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.zking.crm.mapper.OrdersMapper">
+    <resultMap id="BaseResultMap" type="com.zking.crm.model.Orders">
+        <constructor>
+            <idArg column="odr_id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+            <arg column="odr_customer" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="odr_date" jdbcType="TIMESTAMP" javaType="java.lang.String"/>
+            <arg column="odr_addr" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="odr_status" jdbcType="BIT" javaType="java.lang.Boolean"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="rowOrders" type="com.zking.crm.model.Orders">
+        <id column="odr_id" property="odrId" javaType="java.lang.Long"/>
+        <result column="odr_customer" property="odrCustomer" javaType="java.lang.String"/>
+        <result column="odr_date" property="odrDate" javaType="java.lang.String"/>
+        <result column="odr_addr" property="odrAddr" javaType="java.lang.String"/>
+        <result column="odr_status" property="odrStatus" javaType="java.lang.Boolean"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     odr_id, odr_customer, odr_date, odr_addr, odr_status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from orders
-    where odr_id = #{odrId,jdbcType=BIGINT}
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from orders
+        where odr_id = #{odrId,jdbcType=BIGINT}
+    </select>
+    <select id="listOrdersNameAndMoney" resultMap="rowOrders" parameterType="com.zking.crm.model.Orders">
+        select o.odr_id as odr_id,o.odr_customer as odr_customer ,ol.odd_count*ol.odd_price as odr_addr from orders as o,orders_line as ol
+        where o.odr_id=ol.odd_order_id
+        <if test="odrCustomer != null and ''!= odrCustomer">
+            and o.odr_customer like concat('%', #{odrCustomer,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="odrAddr != null and ''!=odrAddr">
+            and year(o.odr_date)=#{odrAddr,jdbcType=VARCHAR}
+        </if>
+        group by ol.odd_order_id
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="listOrdersYear" resultMap="rowOrders">
+        select DISTINCT substr(odr_date,1,4) as odr_addr
+        from orders
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from orders
     where odr_id = #{odrId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.zking.crm.model.Orders" >
+    <insert id="insert" parameterType="com.zking.crm.model.Orders">
     insert into orders (odr_id, odr_customer, odr_date, 
       odr_addr, odr_status)
     values (#{odrId,jdbcType=BIGINT}, #{odrCustomer,jdbcType=VARCHAR}, #{odrDate,jdbcType=TIMESTAMP}, 
       #{odrAddr,jdbcType=VARCHAR}, #{odrStatus,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.zking.crm.model.Orders" >
-    insert into orders
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="odrId != null" >
-        odr_id,
-      </if>
-      <if test="odrCustomer != null" >
-        odr_customer,
-      </if>
-      <if test="odrDate != null" >
-        odr_date,
-      </if>
-      <if test="odrAddr != null" >
-        odr_addr,
-      </if>
-      <if test="odrStatus != null" >
-        odr_status,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="odrId != null" >
-        #{odrId,jdbcType=BIGINT},
-      </if>
-      <if test="odrCustomer != null" >
-        #{odrCustomer,jdbcType=VARCHAR},
-      </if>
-      <if test="odrDate != null" >
-        #{odrDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="odrAddr != null" >
-        #{odrAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="odrStatus != null" >
-        #{odrStatus,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zking.crm.model.Orders" >
-    update orders
-    <set >
-      <if test="odrCustomer != null" >
-        odr_customer = #{odrCustomer,jdbcType=VARCHAR},
-      </if>
-      <if test="odrDate != null" >
-        odr_date = #{odrDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="odrAddr != null" >
-        odr_addr = #{odrAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="odrStatus != null" >
-        odr_status = #{odrStatus,jdbcType=BIT},
-      </if>
-    </set>
-    where odr_id = #{odrId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.zking.crm.model.Orders" >
+    <insert id="insertSelective" parameterType="com.zking.crm.model.Orders">
+        insert into orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="odrId != null">
+                odr_id,
+            </if>
+            <if test="odrCustomer != null">
+                odr_customer,
+            </if>
+            <if test="odrDate != null">
+                odr_date,
+            </if>
+            <if test="odrAddr != null">
+                odr_addr,
+            </if>
+            <if test="odrStatus != null">
+                odr_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="odrId != null">
+                #{odrId,jdbcType=BIGINT},
+            </if>
+            <if test="odrCustomer != null">
+                #{odrCustomer,jdbcType=VARCHAR},
+            </if>
+            <if test="odrDate != null">
+                #{odrDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="odrAddr != null">
+                #{odrAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="odrStatus != null">
+                #{odrStatus,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.crm.model.Orders">
+        update orders
+        <set>
+            <if test="odrCustomer != null">
+                odr_customer = #{odrCustomer,jdbcType=VARCHAR},
+            </if>
+            <if test="odrDate != null">
+                odr_date = #{odrDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="odrAddr != null">
+                odr_addr = #{odrAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="odrStatus != null">
+                odr_status = #{odrStatus,jdbcType=BIT},
+            </if>
+        </set>
+        where odr_id = #{odrId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zking.crm.model.Orders">
     update orders
     set odr_customer = #{odrCustomer,jdbcType=VARCHAR},
       odr_date = #{odrDate,jdbcType=TIMESTAMP},

@@ -3,6 +3,8 @@ package com.zking.crm.mapper;
 import com.zking.crm.model.CstCustomer;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CstCustomerMapper {
     int deleteByPrimaryKey(String custNo);
@@ -18,5 +20,7 @@ public interface CstCustomerMapper {
     int updateByPrimaryKey(CstCustomer record);
 
     int getCstCustomerCount();
+
+    List<CstCustomer> listCstCustomerNameAndCount(CstCustomer record);
 
 }

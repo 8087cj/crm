@@ -2,9 +2,12 @@ package com.zking.crm.biz.impl;
 
 import com.zking.crm.biz.ICstCustomerBiz;
 import com.zking.crm.model.CstCustomer;
+import com.zking.crm.model.CstService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -36,7 +39,16 @@ public class CstCustomerBizImplTest extends BaseTest {
 
         System.out.println("no:"+cstCustomer.getCustNo());
 
-
     }
+
+    @Test
+    public void listCstCustomerNameAndCount() throws Exception {
+        cstCustomer.setCustCredit(2);
+        List<CstCustomer> cstCustomers = cstCustomerBiz.listCstCustomerNameAndCount(cstCustomer);
+        for(CstCustomer s:cstCustomers){
+            System.out.println(s);
+        }
+    }
+
 
 }

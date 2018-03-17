@@ -11,6 +11,14 @@
       <arg column="odd_price" jdbcType="REAL" javaType="java.lang.Float" />
     </constructor>
   </resultMap>
+  <resultMap id="rowOrdersLine" type="com.zking.crm.model.OrdersLine" >
+      <id column="odd_id" property="oddId" javaType="java.lang.Long" />
+      <result column="odd_order_id" property="oddOrderId" javaType="java.lang.Long" />
+      <result column="odd_prod_id" property="oddProdId" javaType="java.lang.Long" />
+      <result column="odd_count" property="oddCount" javaType="java.lang.Long" />
+      <result column="odd_unit" property="oddUnit" javaType="java.lang.String" />
+      <result column="odd_price" property="oddPrice" javaType="java.lang.Float" />
+  </resultMap>
   <sql id="Base_Column_List" >
     odd_id, odd_order_id, odd_prod_id, odd_count, odd_unit, odd_price
   </sql>

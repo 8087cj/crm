@@ -47,85 +47,12 @@
                         <div class="card">
 
                             <!--链接start-->
-                            <div class="button_bar">
-                                <button class="common_button" onclick="help('');">帮助</button>
-                                <button class="common_button" onclick="reload();">查询</button>
-                            </div>
-                            <table class="query_form_table">
-                                <tr>
-                                    <th>客户名称</th>
-                                    <td><input /></td>
-                                    <th>年份</th>
-                                    <td>
-                                        <select>
-                                            <option>全部</option>
-                                            <option>2005</option>
-                                            <option>2006</option>
-                                            <option>2007</option>
-                                            <option>2008</option>
-                                            <option>2009</option>
-                                            <option>2010</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br />
-                            <table class="data_list_table">
-                                <tr>
-                                    <th>编号</th>
-                                    <th>客户名称</th>
-                                    <th>订单金额（元）</th>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">1</td>
-                                    <td class="list_data_ltext">聪海信息科技有限公司</td>
-                                    <td class="list_data_number">8789980</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">2</td>
-                                    <td class="list_data_ltext">北京明科科技有限公司</td>
-                                    <td class="list_data_number">898700</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">3</td>
-                                    <td class="list_data_ltext">太阳药业</td>
-                                    <td class="list_data_number">67760</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">4</td>
-                                    <td class="list_data_ltext">云南天河烟草公司</td>
-                                    <td class="list_data_number">35550</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">5</td>
-                                    <td class="list_data_ltext">北京天桥信息技术有限公司</td>
-                                    <td class="list_data_number">13900</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">6</td>
-                                    <td class="list_data_ltext">北京白羽有限责任公司</td>
-                                    <td class="list_data_number">560900</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">7</td>
-                                    <td class="list_data_ltext" height="15">北京神光培训</td>
-                                    <td class="list_data_number">768900</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">8</td>
-                                    <td class="list_data_ltext" height="35">潍坊青鸟华光</td>
-                                    <td class="list_data_number">330000</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">9</td>
-                                    <td class="list_data_ltext">青鸟无限数码</td>
-                                    <td class="list_data_number">45600</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">10</td>
-                                    <td class="list_data_ltext">北京大学</td>
-                                    <td class="list_data_number">670080</td>
-                                </tr>
+                            <table class="data_list_table" id="rg">
+                                <div>
+                                    &nbsp;客户名称:<input id="odrCustomer"/>
+                                    &nbsp;年份:<input class="easyui-combobox"  id="yy2"  panelHeight="auto" value="全部"/>
+                                    &nbsp;&nbsp;<button class="common_button" id="rgBtn">查询</button>
+                                </div>
 
                             </table>
                             <!--链接end-->
@@ -143,6 +70,51 @@
         </div>
     </footer>
     <div>
+
+        <script type="text/javascript" >
+
+            $(function() {
+                $('#rg').datagrid( {
+                    url : 'serviceReport/listOrdersNameAndMoney',
+                    columns : [ [  {
+                        field : 'odrId',
+                        width :'20%',
+                        title:'编号'
+                    }, {
+                        field : 'odrCustomer',
+                        width :'40%',
+                        title:'客户名称'
+                    },{
+                        field : 'odrAddr',
+                        width :'40%',
+                        title:'订单金额（元）'
+                    } ] ]
+                });
+
+                $('#rgBtn').click(function () {
+                    //获取查询文本框的值
+                    var createDate=document.getElementById("yy2");
+                    var formData = {
+                        odrCustomer:$("#odrCustomer").val(),
+                        odrAddr:createDate.value
+                    };
+                    $('#rg').datagrid({
+                        //在请求远程数据的时候发送额外的参数(dictName)
+                        queryParams:formData
+                    });
+                    //终止默认行为
+                    return false;
+                });
+            });
+
+            $('#yy2').combobox({
+                url:'serviceReport/listOrdersYear',
+                method:'post',
+                valueField:'odrAddr',
+                textField:'odrAddr'
+            });
+
+        </script>
 
     <%@include file="/common/button.jsp" %>
 
