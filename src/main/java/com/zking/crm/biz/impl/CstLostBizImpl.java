@@ -19,4 +19,24 @@ public class CstLostBizImpl implements ICstLostBiz {
     public List<CstLost> listCstLostTrue(CstLost record, PageBean pageBean) {
         return cstLostMapper.listCstLostTrue(record);
     }
+
+    @Override
+    public List<CstLost> listCstLost(CstLost record, PageBean pageBean) {
+        return cstLostMapper.listCstLost(record);
+    }
+
+    @Override
+    public CstLost loadCstLost(Long lstId) {
+        return cstLostMapper.selectByPrimaryKey(lstId);
+    }
+
+    @Override
+    public void delay(CstLost record) {
+        cstLostMapper.delay(record);
+    }
+
+    @Override
+    public void confirm(CstLost record) {
+        cstLostMapper.confirm(record);
+    }
 }

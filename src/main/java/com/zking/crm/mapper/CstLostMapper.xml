@@ -31,12 +31,56 @@
     lst_id, lst_cust_no, lst_cust_name, lst_cust_manager_id, lst_cust_manager_name, lst_last_order_date, 
     lst_lost_date, lst_delay, lst_reason, lst_status
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <sql id="Base_Column_List2">
+        lst_id, lst_cust_no, lst_cust_name, lst_cust_manager_id, lst_cust_manager_name, lst_last_order_date,
+         lst_delay, lst_reason, lst_status
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="rowCstLost" parameterType="java.lang.Long">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List2"/>
         from cst_lost
         where lst_id = #{lstId,jdbcType=BIGINT}
     </select>
+    <select id="listCstLost" resultMap="rowCstLost" parameterType="com.zking.crm.model.CstLost">
+        <if test="lstStatus ==3">
+        select
+        <include refid="Base_Column_List"/>
+        from cst_lost
+        where lst_status=3
+        <if test="lstCustName != null and ''!=lstCustName">
+            and lst_cust_name like concat('%', #{lstCustName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="lstCustManagerName != null and ''!=lstCustManagerName">
+            and lst_cust_manager_name like concat('%', #{lstCustManagerName,jdbcType=VARCHAR},'%')
+        </if>
+        </if>
+
+        <if test="lstStatus ==2">
+            select
+            <include refid="Base_Column_List2"/>
+            from cst_lost
+            where lst_status=2
+            <if test="lstCustName != null and ''!=lstCustName">
+                and lst_cust_name like concat('%', #{lstCustName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="lstCustManagerName != null and ''!=lstCustManagerName">
+                and lst_cust_manager_name like concat('%', #{lstCustManagerName,jdbcType=VARCHAR},'%')
+            </if>
+        </if>
+        <if test="lstStatus ==1 ">
+            select
+            <include refid="Base_Column_List2"/>
+            from cst_lost
+            where lst_status=1
+            <if test="lstCustName != null and ''!=lstCustName">
+                and lst_cust_name like concat('%', #{lstCustName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="lstCustManagerName != null and ''!=lstCustManagerName">
+                and lst_cust_manager_name like concat('%', #{lstCustManagerName,jdbcType=VARCHAR},'%')
+            </if>
+        </if>
+    </select>
+
     <select id="listCstLostTrue" resultMap="rowCstLost" parameterType="com.zking.crm.model.CstLost">
         select
         <include refid="Base_Column_List"/>
@@ -176,4 +220,17 @@
       lst_status = #{lstStatus,jdbcType=INTEGER}
     where lst_id = #{lstId,jdbcType=BIGINT}
   </update>
+    <update id="delay" parameterType="com.zking.crm.model.CstLost">
+        update cst_lost
+        set lst_delay = #{lstDelay,jdbcType=VARCHAR},
+        lst_status = 2
+        where lst_id = #{lstId,jdbcType=BIGINT}
+    </update>
+    <update id="confirm" parameterType="com.zking.crm.model.CstLost">
+        update cst_lost
+        set lst_lost_date = #{lstLostDate,jdbcType=TIMESTAMP},
+        lst_reason = #{lstReason,jdbcType=VARCHAR},
+        lst_status = 3
+        where lst_id = #{lstId,jdbcType=BIGINT}
+    </update>
 </mapper>

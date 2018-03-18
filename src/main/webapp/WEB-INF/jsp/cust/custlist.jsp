@@ -46,178 +46,215 @@
                     <div class="col-xs-12">
                         <div class="card">
 
-                            <!--链接start-->
-                            <div class="button_bar">
-                                <button class="common_button" onclick="help('');">帮助</button>
-                                <button class="common_button" onclick="reload();">查询</button>
+                            <table class="query_form_table" id="cc">
+                                <div>
+                                    <div>
+                                        &nbsp;客户编号:<input id="CustId"/>
+                                        &nbsp;客户名称:<input id="CustName"/>
+                                        &nbsp;地区:<input class="easyui-combobox" id="cx" name="custRegion"  panelHeight="auto" value="全部"/>
+                                        <br>
+                                        &nbsp;客户经理:<input id="ManagerName"/>
+                                        &nbsp;客户等级:<input class="easyui-combobox" id="cdj" name="custLevelLabel" panelHeight="auto" value="全部"/>
+                                        &nbsp;&nbsp;<button class="common_button" id="ccBtn">查询</button>
+                                    </div>
+                                    <div>
+                                        <a  onclick="openCstEditDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true" >编辑</a>
+                                        <a  onclick="openSalEditDialog()" class="easyui-linkbutton" iconCls="icon-man" plain="true" >联系人</a>
+                                        <a  onclick="deleteSal()" class="easyui-linkbutton" iconCls="icon-large-shapes" plain="true">交往记录</a>
+                                        <a  onclick="openLldd()" class="easyui-linkbutton" iconCls="icon-large-chart" plain="true">历史订单</a>
+                                        <a  onclick="deleteSal()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+                                    </div>
+                                </div>
+
+                            </table>
+
+                            <!-- 编辑客户管理start -->
+                            <div id="cc-dialog" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:780px;  padding:20px">
+                                <form method="post" id="cc-form">
+
+                                    <table class="query_form_table">
+
+                                        <tr>
+                                            <th >客户编号:</th>
+                                            <td><input name="custNo" disabled="true"/><span class="red_star">*</span></td>
+                                            <td><input style="display: none"/></td>
+                                            <th>名称:</th>
+                                            <td><input name="custName" /><span class="red_star">*</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>地区:</th>
+                                            <td>
+                                                <input class="easyui-combobox" id="cx2" name="custRegion"  panelHeight="auto" />
+                                            </td>
+                                            <td><input style="display: none"/></td>
+                                            <th>客户经理:</th>
+                                            <td>
+                                                <input class="easyui-combobox" id="mmjl" name="custManagerName"  panelHeight="auto" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>客户等级:</th>
+                                            <td  >
+                                                <input class="easyui-combobox" id="cdj2" name="custLevelLabel" panelHeight="auto" />
+                                            </td>
+                                            <td><input style="display: none"/></td>
+                                            <td><input style="display: none"/></td>
+                                            <td><input style="display: none"/></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>客户满意度</th>
+                                            <td>
+                                                <select class="easyui-combobox" name="custSatisfy">
+                                                    <option value="">未指定</option>
+                                                    <option value="5">☆☆☆☆☆</option>
+                                                    <option value="4">☆☆☆☆</option>
+                                                    <option value="3">☆☆☆</option>
+                                                    <option value="2">☆☆</option>
+                                                    <option value="1">☆</option></select><span class="red_star">*</span>
+                                            </td>
+                                            <td><input style="display: none"/></td>
+                                            <th>客户信用度</th>
+                                            <td>
+                                                <select class="easyui-combobox" name="custCredit">
+                                                    <option value="">未指定</option>
+                                                    <option value="5">☆☆☆☆☆</option>
+                                                    <option value="4">☆☆☆☆</option>
+                                                    <option value="3">☆☆☆</option>
+                                                    <option value="2">☆☆</option>
+                                                    <option value="1">☆</option></select><span class="red_star">*</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>&nbsp; &nbsp; &nbsp;</th>
+                                            <td><input style="display: none"/></td>
+                                            <td><input style="display: none"/></td>
+                                            <td><input style="display: none"/></td>
+                                            <td><input style="display: none"/></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>地址:</th>
+                                            <td colspan="2"><input name="custAddr" /><span class="red_star">*</span></td>
+
+                                            <th>邮政编码:</th>
+                                            <td colspan="3"><input name="custZip" /><span class="red_star">*</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>电话:</th>
+                                            <td colspan="2"><input name="custTel" /><span class="red_star">*</span></td>
+
+                                            <th>传真:</th>
+                                            <td colspan="3"><input name="custFax" /><span class="red_star">*</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>网址:</th>
+                                            <td colspan="3"><input name="custWebsite" /><span class="red_star">*</span></td>
+                                            <td>
+                                                <input style="display: none"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>&nbsp; &nbsp; &nbsp;</th>
+                                            <td>
+                                                <input style="display: none"/>
+                                            </td>
+                                            <td>
+                                                <input style="display: none"/>
+                                            </td>
+                                            <td>
+                                                <input style="display: none"/>
+                                            </td>
+                                            <td>
+                                                <input style="display: none"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>营业执照注册号:</th>
+                                            <td colspan="2"><input name="custLicenceNo" /></td>
+
+                                            <th>法人:</th>
+                                            <td colspan="3"><input name="custChieftain" /><span class="red_star">*</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>注册资金（万元）:</th>
+                                            <td colspan="2"><input name="custBankroll" /></td>
+
+                                            <th>年营业额:</th>
+                                            <td colspan="3"><input name="custTurnover" /></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>开户银行:</th>
+                                            <td colspan="2"><input name="custBank" /><span class="red_star">*</span></td>
+
+                                            <th>银行账号:</th>
+                                            <td colspan="3"><input name="custBankAccount" /><span class="red_star">*</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>地税登记号:</th>
+                                            <td colspan="2"><input name="custLocalTaxNo" /></td>
+
+                                            <th>国税登记号:</th>
+                                            <td colspan="3"><input name="custNationalTaxNo" /></td>
+                                        </tr>
+
+                                    </table>
+                                </form>
                             </div>
-                            <table class="query_form_table">
-                                <tr>
-                                    <th>客户编号</th>
-                                    <td><input /></td>
-                                    <th>名称</th>
-                                    <td><input /></td>
-                                    <th>地区</th>
-                                    <td>
-                                        <select>
-                                            <option>全部</option>
-                                            <option>北京</option>
-                                            <option>华北</option>
-                                            <option>中南</option>
-                                            <option>东北</option>
-                                            <option>西部</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>客户经理</th>
-                                    <td><input /></td>
-                                    <th>客户等级</th>
-                                    <td>
-                                        <select>
-                                            <option>全部</option>
-                                            <option>战略合作伙伴</option>
-                                            <option>合作伙伴</option>
-                                            <option>大客户</option>
-                                            <option>普通客户</option>
-                                        </select>
-                                    </td>
-                                    <th>　</th>
-                                    <td>　</td>
-                                </tr>
-                            </table>
-                            <br />
-                            <table class="data_list_table">
-                                <tr>
-                                    <th>序号</th>
-                                    <th>客户编号</th>
-                                    <th>名称</th>
-                                    <th>地区</th>
-                                    <th>客户经理</th>
-                                    <th>客户等级</th>
-                                    <th>操作</th>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">1</td>
-                                    <td class="list_data_text">KH071202001</td>
-                                    <td class="list_data_ltext">聪海信息科技有限公司</td>
-                                    <td class="list_data_text">北京</td>
-                                    <td class="list_data_text">小明</td>
-                                    <td class="list_data_text">战略合作伙伴</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="to('linkman.html');" title="联系人" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('activities.html');" title="交往记录" src="../images/bt_acti.gif" class="op_button" />
-                                        <img onclick="to('orders.html');" title="历史订单" src="../images/bt_orders.gif" class="op_button" />
+                            <!-- 编辑客户管理end -->
 
-                                        <img onclick="del('“客户：聪海信息科技有限公司”');" title="删除" src="../images/bt_del.gif" class="op_button" />
+                            <!-- 历史订单start -->
+                            <div id="lldd-dialog" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:780px;  padding:20px">
+                                <form method="post" id="lldd-form">
+                                    <table class="query_form_table">
+                                        <tr>
+                                            <th>客户编号</th>
+                                            <td><input name="custNo" disabled="true"/></td>
+                                            <th>客户名称</th>
+                                            <td><input name="custName" disabled="true"/></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                <br />
+                                <table class="data_list_table" id="lldd">
+                                    <div>
+                                        <a  onclick="openDdmx()" class="easyui-linkbutton" iconCls="icon-large-smartart" plain="true" >明细</a>
+                                    </div>
+                                </table>
+                            </div>
+                            <!-- 历史订单end -->
+                            <!-- 订单明细start -->
+                            <div id="ddmx-dialog" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:780px;  padding:20px">
+                                <form method="post" id="ddmx-form">
+                                    <table class="query_form_table" height="59">
+                                        <tr>
+                                            <th>订单编号</th>
+                                            <td><input name="odrId" disabled="true"/></td>
+                                            <th>日期</th>
+                                            <td><input name="odrDate" disabled="true"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th height="28">送货地址</th>
+                                            <td><input name="odrAddr" disabled="true"/></td>
+                                            <th height="28">状态</th>
+                                            <td><input name="odrStatus" disabled="true"/></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                                <br />
+                                <table class="data_list_table" id="ddmx">
+                                </table>
+                            </div>
+                            <!-- 历史订单end -->
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">2</td>
-                                    <td class="list_data_text">KH071201008</td>
-                                    <td class="list_data_ltext">北京明科科技有限公司</td>
-                                    <td class="list_data_text">北京</td>
-                                    <td class="list_data_text">小明</td>
-                                    <td class="list_data_text">普通客户</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="to('linkman.html');" title="联系人" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('activities.html');" title="交往记录" src="../images/bt_acti.gif" class="op_button" />
-                                        <img onclick="to('orders.html');" title="历史订单" src="../images/bt_orders.gif" class="op_button" />
-
-                                        <img onclick="del('“客户：聪海信息科技有限公司”');" title="删除" src="../images/bt_del.gif" class="op_button" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">3</td>
-                                    <td class="list_data_text">KH071201007</td>
-                                    <td class="list_data_ltext">太阳药业</td>
-                                    <td class="list_data_text">华北</td>
-                                    <td class="list_data_text">旺财</td>
-                                    <td class="list_data_text">重点开发客户</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />&nbsp;
-                                        <img onclick="to('linkman.html');" title="联系人" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('activities.html');" title="交往记录" src="../images/bt_acti.gif" class="op_button" />
-                                        <img onclick="to('orders.html');" title="历史订单" src="../images/bt_orders.gif" class="op_button" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">4</td>
-                                    <td class="list_data_text">KH071201006</td>
-                                    <td class="list_data_ltext">云南天河烟草公司</td>
-                                    <td class="list_data_text">中南</td>
-                                    <td class="list_data_text">球球</td>
-
-                                    <td class="list_data_text">重点开发客户</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="to('linkman.html');" title="联系人" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('activities.html');" title="交往记录" src="../images/bt_acti.gif" class="op_button" />
-                                        <img onclick="to('orders.html');" title="历史订单" src="../images/bt_orders.gif" class="op_button" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">5</td>
-                                    <td class="list_data_text">KH071201005</td>
-                                    <td class="list_data_ltext">北京天桥信息技术有限公司</td>
-                                    <td class="list_data_text">北京</td>
-                                    <td class="list_data_text">小明</td>
-                                    <td class="list_data_text">大客户</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="to('linkman.html');" title="联系人" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('activities.html');" title="交往记录" src="../images/bt_acti.gif" class="op_button" />
-                                        <img onclick="to('orders.html');" title="历史订单" src="../images/bt_orders.gif" class="op_button" />
-
-                                        <img onclick="del('“客户：聪海信息科技有限公司”');" title="删除" src="../images/bt_del.gif" class="op_button" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">6</td>
-                                    <td class="list_data_text">KH071201004</td>
-                                    <td class="list_data_ltext">北京白羽有限责任公司</td>
-                                    <td class="list_data_text">北京</td>
-                                    <td class="list_data_text">小明</td>
-                                    <td class="list_data_text">普通客户</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="to('linkman.html');" title="联系人" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('activities.html');" title="交往记录" src="../images/bt_acti.gif" class="op_button" />
-                                        <img onclick="to('orders.html');" title="历史订单" src="../images/bt_orders.gif" class="op_button" />
-
-                                        <img onclick="del('“客户：聪海信息科技有限公司”');" title="删除" src="../images/bt_del.gif" class="op_button" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number" height="15">7</td>
-                                    <td class="list_data_text" height="15">KH071201003</td>
-                                    <td class="list_data_ltext" height="15">北京神光培训</td>
-                                    <td class="list_data_text" height="15">北京</td>
-                                    <td class="list_data_text" height="15">阿咪</td>
-                                    <td class="list_data_text" height="15">大客户</td>
-                                    <td class="list_data_op" height="15">
-                                        <img onclick="to('edit.html');" title="编辑" src="../images/bt_edit.gif" class="op_button" />&nbsp;
-                                        <img onclick="to('linkman.html');" title="联系人" src="../images/bt_linkman.gif" class="op_button" />
-                                        <img onclick="to('activities.html');" title="交往记录" src="../images/bt_acti.gif" class="op_button" />
-                                        <img onclick="to('orders.html');" title="历史订单" src="../images/bt_orders.gif" class="op_button" />
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th colspan="100" class="pager">
-                                        <div class="pager">
-                                            共59条记录 每页<input value="10" size="2" />条
-                                            第<input value="1" size="2"/>页/共5页
-                                            <a href="#">第一页</a>
-                                            <a href="#">上一页</a>
-                                            <a href="#">下一页</a>
-                                            <a href="#">最后一页</a>
-                                            转到<input value="1" size="2" />页
-                                            <button width="20" onclick="reload();">GO</button>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </table>
                             <!--链接end-->
 
                         </div>
@@ -233,7 +270,251 @@
         </div>
     </footer>
     <div>
-    <%@include file="/common/button.jsp" %>
+
+    <script type="text/javascript" >
+
+        $(function() {
+            $('#cc').datagrid( {
+                pagination : true,
+                pageList : [ 2, 4, 6, 8 ],
+                pageSize : 6,
+                idFiled : 'custNo',
+                fitColumns:true,
+                singleSelect : true,
+
+                url : 'cstCustomer/CstCustomer',
+                columns : [ [ {
+                    field : 'custNo',
+                    width :'20%',
+                    title:'客户编号'
+                }, {
+                    field : 'custName',
+                    width :'20%',
+                    title:'名称'
+                }, {
+                    field : 'custRegion',
+                    width :'20%',
+                    title:'地区',
+                },{
+                    field : 'custManagerName',
+                    width :'20%',
+                    title:'客户经理'
+                }, {
+                    field : 'custLevelLabel',
+                    width :'20%',
+                    title:'客户等级'
+                }
+                ] ]
+            });
+            $('#ccBtn').click(function () {
+                var formData = {
+                    custNo:$("#CustId").val(),
+                    custName:$("#CustName").val(),
+                    custRegion:$("#cx").val(),
+                    custManagerName:$("#ManagerName").val(),
+                    custLevelLabel:$("#cdj").val()
+                };
+                $('#cc').datagrid({
+                    queryParams:formData
+                });
+                return false;
+            });
+        })
+
+        //下拉框的值
+        //地区
+        $('#cx').combobox({
+            url:'BasDict/toGetDict',
+            method:'post',
+            valueField:'dictItem',
+            textField:'dictItem'
+        });
+        $('#cx2').combobox({
+            url:'BasDict/toGetDict',
+            method:'post',
+            valueField:'dictItem',
+            textField:'dictItem'
+        });
+        //客户等级
+        $('#cdj').combobox({
+            url:'BasDict/toGetDidj',
+            method:'post',
+            valueField:'dictItem',
+            textField:'dictItem'
+        });
+        $('#cdj2').combobox({
+            url:'BasDict/toGetDidj',
+            method:'post',
+            valueField:'dictItem',
+            textField:'dictItem'
+        });
+        //客户经理
+        $('#mmjl').combobox({
+            url:'salChance/toDispatch',
+            method:'post',
+            valueField:'usrName',
+            textField:'usrName'
+        });
+
+        //编辑
+        function openCstEditDialog() {
+            var item = $('#cc').datagrid('getSelections');
+            var row = item[0];
+
+            if(item.length!=1) {
+                $.messager.alert("系统提示", "请选择一条要编辑的数据");
+                return;
+            }
+
+            $('#cc-form').form('load', row);
+            $('#cc-dialog').dialog({
+                closed:false,
+                modal:true,
+                title:"修改客户信息",
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        $('#cc-form').form('submit', {
+                            url:'/cstCustomer/edit?custNo='+row.custNo,
+                            success:function(data){
+                                if(data==1){
+                                    $.messager.alert('信息提示','提交成功！','info');
+                                    $('#cc-dialog').dialog('close');
+                                    $("#cc").datagrid("reload");
+                                }
+                                else
+                                {
+                                    $.messager.alert('信息提示','提交失败！','info');
+                                }
+                            }
+                        });
+                    }
+                }, {
+                    text: '取消',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        $('#cc-dialog').dialog('close');
+                    }
+                }]
+            });
+
+        }
+
+        //历史订单
+        function openLldd(){
+            var item = $('#cc').datagrid('getSelections');
+            var row = item[0];
+            if(item.length!=1) {
+                $.messager.alert("系统提示", "请选择一条要查看历史订单的数据");
+                return;
+            }
+            $('#lldd-form').form('load', row);
+            $('#lldd').datagrid( {
+                pagination : true,
+                pageList : [ 2, 4, 6, 8 ],
+                pageSize : 6,
+                idFiled : 'odrId',
+                fitColumns:true,
+                singleSelect : true,
+                url : 'cstCustomer/listOrdersByCustomer?odrCustomer='+row.custName,
+                columns : [ [ {
+                    field : 'odrId',
+                    width :'25%',
+                    title:'订单编号'
+                }, {
+                    field : 'odrDate',
+                    width :'25%',
+                    title:'日期'
+                }, {
+                    field : 'odrAddr',
+                    width :'25%',
+                    title:'送货地址',
+                },{
+                    field : 'odrStatus',
+                    width :'25%',
+                    title:'状态',
+                    formatter:function (val,rec) {
+                        var str;
+                        if(rec.odrStatus==0){
+                            str='未回款';
+                        }else  if(rec.odrStatus==1){
+                            str='已回款';
+                        }
+                        return str;
+                    }
+                }] ]
+            });
+            $('#lldd-dialog').dialog({
+                closed:false,
+                modal:true,
+                title:"历史订单",
+                buttons: [{
+                    text: 'ok',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        $('#lldd-dialog').dialog('close');
+                    }
+                }]
+            });
+        }
+
+        //订单明细
+        function openDdmx(){
+            var item = $('#lldd').datagrid('getSelections');
+            var row = item[0];
+            if(item.length!=1) {
+                $.messager.alert("系统提示", "请选择一条要查看历史订单的数据");
+                return;
+            }
+            $('#ddmx-form').form('load', row);
+
+            $('#ddmx').datagrid( {
+                pagination : true,
+                pageList : [ 2, 4, 6, 8 ],
+                pageSize : 6,
+                idFiled : 'oddId',
+                fitColumns:true,
+                singleSelect : true,
+                url : 'cstCustomer/listOrdersLineByOrder?oddOrderId='+row.odrId,
+                columns : [ [ {
+                    field : 'oddProdId',
+                    width :'40%',
+                    title:'商品'
+                }, {
+                    field : 'oddCount',
+                    width :'20%',
+                    title:'数量'
+                }, {
+                    field : 'oddUnit',
+                    width :'20%',
+                    title:'单位',
+                },{
+                    field : 'oddPrice',
+                    width :'20%',
+                    title:'单价（元）'
+                }
+                ] ]
+            });
+            $('#ddmx-dialog').dialog({
+                closed:false,
+                modal:true,
+                title:"订单明细",
+                buttons: [{
+                    text: 'ok',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        $('#ddmx-dialog').dialog('close');
+                    }
+                }]
+            });
+        }
+
+
+    </script>
+
+
+        <%@include file="/common/button.jsp" %>
 
 </body>
 

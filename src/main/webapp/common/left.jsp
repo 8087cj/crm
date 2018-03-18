@@ -38,8 +38,8 @@
                 <div id="dropdown-form" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="cust/custlist.jsp">客户信息管理</a></li>
-                            <li><a href="cust/lostlist.jsp">客户流失管理</a></li>
+                            <li><a href="/cstCustomer/toCstCustomer">客户信息管理</a></li>
+                            <li><a href="/cstCustomer/toCstCustomerLost">客户流失管理</a></li>
                         </ul>
                     </div>
                 </div>

@@ -26,8 +26,15 @@
         from orders
         where odr_id = #{odrId,jdbcType=BIGINT}
     </select>
+
+    <select id="listOrdersByCustomer" resultMap="rowOrders" parameterType="com.zking.crm.model.Orders">
+        select
+        <include refid="Base_Column_List"/>
+        from orders
+        where odr_customer = #{odrCustomer,jdbcType=VARCHAR}
+    </select>
     <select id="listOrdersNameAndMoney" resultMap="rowOrders" parameterType="com.zking.crm.model.Orders">
-        select o.odr_id as odr_id,o.odr_customer as odr_customer ,ol.odd_count*ol.odd_price as odr_addr from orders as o,orders_line as ol
+        select o.odr_id as odr_id,o.odr_customer as odr_customer ,sum(ol.odd_count*ol.odd_price) as odr_addr from orders as o,orders_line as ol
         where o.odr_id=ol.odd_order_id
         <if test="odrCustomer != null and ''!= odrCustomer">
             and o.odr_customer like concat('%', #{odrCustomer,jdbcType=VARCHAR},'%')
@@ -35,7 +42,7 @@
         <if test="odrAddr != null and odrAddr!='全部' and ''!=odrAddr">
             and year(o.odr_date)=#{odrAddr,jdbcType=VARCHAR}
         </if>
-        group by ol.odd_order_id
+        group by o.odr_customer
   </select>
     <select id="listOrdersYear" resultMap="rowOrders">
         select DISTINCT substr(odr_date,1,4) as odr_addr

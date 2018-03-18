@@ -19,7 +19,7 @@ public class CstLost implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String lstLastOrderDate;
 
-    @JsonFormat(pattern = "yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String lstLostDate;
 
     private String lstDelay;

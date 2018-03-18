@@ -23,4 +23,7 @@ public interface CstCustomerMapper {
 
     List<CstCustomer> listCstCustomerNameAndCount(CstCustomer record);
 
+    List<CstCustomer> listCstCustomer(CstCustomer cstCustomer);
+
+    CstCustomer loadCstTop(String custNo);
 }

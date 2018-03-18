@@ -23,4 +23,6 @@ public interface OrdersMapper {
 
     List<Orders> listOrdersYear();
 
+    List<Orders> listOrdersByCustomer(Orders record);
+
 }

@@ -15,6 +15,8 @@ public class OrdersLine implements Serializable {
 
     private Float oddPrice;
 
+    private Float sumPrice;
+
     public OrdersLine(Long oddId, Long oddOrderId, Long oddProdId, Long oddCount, String oddUnit, Float oddPrice) {
         this.oddId = oddId;
         this.oddOrderId = oddOrderId;
@@ -26,6 +28,14 @@ public class OrdersLine implements Serializable {
 
     public OrdersLine() {
         super();
+    }
+
+    public Float getSumPrice() {
+        return sumPrice;
+    }
+
+    public void setSumPrice(Float sumPrice) {
+        this.sumPrice = sumPrice;
     }
 
     public Long getOddId() {

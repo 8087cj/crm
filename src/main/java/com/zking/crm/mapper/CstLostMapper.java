@@ -21,4 +21,12 @@ public interface CstLostMapper {
 
     List<CstLost> listCstLostTrue(CstLost record);
 
+    List<CstLost> listCstLost(CstLost record);
+
+    //暂缓措施
+    int delay(CstLost record);
+
+    //确认流失
+    int confirm(CstLost record);
+
 }

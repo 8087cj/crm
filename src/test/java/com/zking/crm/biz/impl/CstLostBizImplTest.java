@@ -19,16 +19,38 @@ public class CstLostBizImplTest extends BaseTest {
 
     @Before
     public void setUp() throws Exception {
-        cstLost=new CstLost();
+        cstLost = new CstLost();
     }
 
     @Test
     public void listCstLostTrue() throws Exception {
         cstLost.setLstCustName("2");
-        List<CstLost> cstLosts = cstLostBiz.listCstLostTrue(cstLost,null);
-        for(CstLost cl:cstLosts){
+        List<CstLost> cstLosts = cstLostBiz.listCstLostTrue(cstLost, null);
+        for (CstLost cl : cstLosts) {
             System.out.println(cl);
         }
+    }
+
+    @Test
+    public void listCstLost() throws Exception {
+        cstLost.setLstStatus(3);
+        List<CstLost> cstLosts = cstLostBiz.listCstLost(cstLost, null);
+        for (CstLost cl : cstLosts) {
+            System.out.println(cl);
+        }
+    }
+
+    @Test
+    public void delay() throws Exception {
+        CstLost cl = cstLostBiz.loadCstLost(4l);
+        cstLost.setLstId(4l);
+        if (cl.getLstDelay() != null) {
+            cstLost.setLstDelay(cl.getLstDelay() + "333" + ".");
+        }else{
+            cstLost.setLstDelay( "333" + ".");
+        }
+        cstLostBiz.delay(cstLost);
+
     }
 
 }

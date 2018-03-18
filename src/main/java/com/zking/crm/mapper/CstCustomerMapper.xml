@@ -65,6 +65,34 @@
     from cst_customer
     where cust_no = #{custNo,jdbcType=CHAR}
   </select>
+
+  <select id="listCstCustomer" resultMap="rowCstCustomer" parameterType="com.zking.crm.model.CstCustomer" >
+    select *
+    from Cst_customer
+    where 1=1
+    <if test="custNo != null and ''!= custNo" >
+      and cust_no like concat('%', #{custNo,jdbcType=CHAR},'%')
+    </if>
+    <if test="custName != null and ''!= custName" >
+      and cust_name like concat('%', #{custName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="custManagerName != null and ''!= custManagerName" >
+      and cust_manager_name like concat('%', #{custManagerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="custRegion != null and ''!= custRegion and custRegion!='全部'" >
+      and cust_region = #{custRegion,jdbcType=VARCHAR}
+    </if>
+    <if test="custLevel != null and ''!=custLevel and  custLevel!='全部'" >
+      and cust_level = #{custLevel,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="loadCstTop" resultMap="rowCstCustomer" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from Cst_customer
+    where cust_no = #{custNo,jdbcType=CHAR}
+  </select>
   <select id="listCstCustomerNameAndCount" resultMap="rowCstCustomer" parameterType="com.zking.crm.model.CstCustomer" >
     <if test="custCredit == 1" >
       select cust_level_label,count(cust_level_label) as cust_level

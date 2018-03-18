@@ -47,66 +47,82 @@
                         <div class="card">
 
                             <!--链接start-->
-                            <div class="button_bar">
-                                <button class="common_button" onclick="help('');">帮助</button>
-                                <button class="common_button" onclick="reload();">查询</button>
-                            </div>
-                            <table class="query_form_table">
-                                <tr>
-                                    <th>客户</th>
-                                    <td><input /></td>
-                                    <th>客户经理</th>
-                                    <td><input /></td>
-                                    <th>状态</th>
-                                    <td>
-                                        <select>
-                                            <option>全部</option>
-                                            <option>预警</option>
-                                            <option>暂缓流失</option>
-                                            <option>确认流失</option>
+                            <table class="query_form_table" id="cl">
+                                <div>
+                                    <div>
+                                        &nbsp;客户名称:<input id="CustName2"/>
+                                        &nbsp;客户经理:<input id="ManagerName2"/>
+                                        &nbsp;状态:
+                                        <select id="zt">
+                                            <option value="1">预警</option>
+                                            <option value="2">暂缓流失</option>
+                                            <option value="3">确认流失</option>
                                         </select>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br />
-                            <table class="data_list_table">
-                                <tr>
-                                    <th>编号</th>
-                                    <th>客户</th>
-                                    <th>客户经理</th>
-                                    <th>上次下单时间</th>
-                                    <th>确认流失时间</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">1</td>
-                                    <td class="list_data_text">阳光实业</td>
-                                    <td class="list_data_ltext">球球</td>
-                                    <td class="list_data_text">2005年12月07日</td>
-                                    <td class="list_data_text">　</td>
-                                    <td class="list_data_text">暂缓流失</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('confirm.html');" title="确认流失" src="../images/bt_confirm.gif" class="op_button" />
-                                        <img onclick="to('relay.html');" title="暂缓流失" src="../images/bt_relay.gif" class="op_button" />
+                                        &nbsp;&nbsp;<button class="common_button" id="clBtn">查询</button>
+                                    </div>
+                                    <div>
+                                        <a  onclick="confirmCst()" class="easyui-linkbutton" iconCls="icon-ok" plain="true">确认流失</a>
+                                        <a  onclick="delayCst()" class="easyui-linkbutton" iconCls="icon-no" plain="true">暂缓流失</a>
+                                    </div>
+                                </div>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th colspan="7" class="pager">
-                                        <div class="pager">
-                                            共59条记录 每页<input value="10" size="2" />条
-                                            第<input value="1" size="2"/>页/共5页
-                                            <a href="#">第一页</a>
-                                            <a href="#">上一页</a>
-                                            <a href="#">下一页</a>
-                                            <a href="#">最后一页</a>
-                                            转到<input value="1" size="2" />页
-                                            <button width="20" onclick="reload();">GO</button>
-                                        </div>
-                                    </th>
-                                </tr>
                             </table>
+
+                            <div id="cl-dialog" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:550px;  padding:20px;">
+                                <form id="cl-form"  method="post">
+                                    <table class="query_form_table">
+                                        <tr>
+                                            <th>编号</th>
+                                            <td><input readonly readonly name="lstId"/></td>
+                                            <th>客户</th>
+                                            <td><input readonly readonly name="lstCustName"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>客户经理</th>
+                                            <td><input readonly readonly name="lstCustManagerName"/></td>
+                                            <th>上次下单时间</th>
+                                            <td><input readonly readonly name="lstLastOrderDate"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>暂缓措施</th>
+                                            <td colspan="3"><input readonly readonly name="lstDelay"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>追加暂缓措施</th>
+                                            <td colspan="3">
+                                                <textarea rows="6" cols="50" name="lstReason"></textarea><span class="red_star">*</span></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+
+                            <div id="cl-dialog2" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:550px;  padding:20px;">
+                                <form id="cl-form2"  method="post">
+                                    <table class="query_form_table">
+                                        <tr>
+                                            <th>编号</th>
+                                            <td><input readonly readonly name="lstId"/></td>
+                                            <th>客户</th>
+                                            <td><input readonly readonly name="lstCustName"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>客户经理</th>
+                                            <td><input readonly readonly name="lstCustManagerName"/></td>
+                                            <th>上次下单时间</th>
+                                            <td><input readonly readonly name="lstLastOrderDate"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>暂缓措施</th>
+                                            <td colspan="3"><input readonly readonly name="lstDelay"/></td>
+                                        </tr>
+                                        <tr>
+                                            <th>流失原因</th>
+                                            <td colspan="3">
+                                                <textarea rows="6" cols="50" name="lstReason"></textarea><span class="red_star">*</span></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
                             <!--链接end-->
 
                         </div>
@@ -122,7 +138,165 @@
         </div>
     </footer>
     <div>
+        <script type="text/javascript" >
 
+
+            $(function() {
+                $('#cl').datagrid( {
+                    pagination : true,
+                    pageList : [ 2, 4, 6, 8 ],
+                    pageSize : 6,
+                    idFiled : 'lstId',
+                    fitColumns:true,
+                    singleSelect : true,
+                    url : 'cstCustomer/listCstLost',
+                    columns : [ [ {
+                        field : 'lstId',
+                        width :'15%',
+                        title:'编号'
+                    }, {
+                        field : 'lstCustName',
+                        width :'15%',
+                        title:'客户名称'
+                    },{
+                        field : 'lstCustManagerName',
+                        width :'15%',
+                        title:'客户经理'
+                    },{
+                        field : 'lstLastOrderDate',
+                        width :'20%',
+                        title:'上次下单时间'
+                    },{
+                        field : 'lstLostDate',
+                        width :'20%',
+                        title:'确认流失时间',
+                        formatter:function(val,rec){
+                            var ss;
+                            if(rec.lstLostDate==null){
+                                ss='';
+                            }
+                            return ss;
+                        }
+                    }, {
+                        field : 'lstStatus',
+                        width :'15%',
+                        title:'状态',
+                        formatter:function(val,rec){
+                            var str;
+                            if(rec.lstStatus==1){
+                                str='预警';
+                            }else if(rec.lstStatus==2){
+                                str='暂缓流失';
+                            }else if(rec.lstStatus==3){
+                                str='确认流失';
+                            }else if(rec.lstStatus==4){
+                                str='暂缓客户流失成功';
+                            }
+                            return str;
+                        }
+                    }
+                    ] ]
+                });
+                $('#clBtn').click(function () {
+                    alert($("#zt").val());
+                    var formData = {
+                        lstCustName:$("#CustName2").val(),
+                        lstCustManagerName:$("#ManagerName2").val(),
+                        lstStatus:$("#zt").val()
+                    };
+                    $('#cl').datagrid({
+                        queryParams:formData
+                    });
+                    return false;
+                });
+            })
+
+            //暂缓流失
+            function delayCst(){
+                var item = $('#cl').datagrid('getSelections');
+                var row = item[0];
+                if(item.length!=1) {
+                    $.messager.alert("系统提示", "请选择一条要暂缓流失的数据");
+                    return;
+                }
+                if(row.lstStatus==3) {
+                    $.messager.alert("系统提示", "该数据已确认流失，请重新选择！");
+                    return;
+                }
+                var delayValue=document.getElementsByName("lstReason");
+                $('#cl-form').form('load', row);
+                $('#cl-dialog').dialog({
+                    closed:false,
+                    modal:true,
+                    title:"暂缓流失",
+                    buttons: [{
+                        text: '确定',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+                            $('#cl-form').form('submit', {
+                                url:'/cstCustomer/delay',
+                                success:function(data){
+                                    if(data==1){
+                                        $.messager.alert('信息提示','提交成功！','info');
+                                        $('#cl-dialog').dialog('close');
+                                        $("#cl").datagrid("reload");
+                                    } else {
+                                        $.messager.alert('信息提示','提交失败！','info');
+                                    }
+                                }
+                            });
+                        }
+                    }, {
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function () {
+                            $('#cl-dialog').dialog('close');
+                        }
+                    }]
+                });
+            }
+
+            // 确认流失
+            function confirmCst(){
+                var item = $('#cl').datagrid('getSelections');
+                var row = item[0];
+                if(item.length!=1) {
+                    $.messager.alert("系统提示", "请选择一条要暂缓流失的数据");
+                    return;
+                }
+                $('#cl-form2').form('load', row);
+                $('#cl-dialog2').dialog({
+                    closed:false,
+                    modal:true,
+                    title:"暂缓流失",
+                    buttons: [{
+                        text: '确定',
+                        iconCls: 'icon-ok',
+                        handler: function () {
+                            $('#cl-form2').form('submit', {
+                                url:'/cstCustomer/confirm',
+                                success:function(data){
+                                    if(data==1){
+                                        $.messager.alert('信息提示','提交成功！','info');
+                                        $('#cl-dialog2').dialog('close');
+                                        $("#cl").datagrid("reload");
+                                    } else {
+                                        $.messager.alert('信息提示','提交失败！','info');
+                                    }
+                                }
+                            });
+                        }
+                    }, {
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function () {
+                            $('#cl-dialog2').dialog('close');
+                        }
+                    }]
+                });
+            }
+
+        </script>
     <%@include file="/common/button.jsp" %>
 
 </body>

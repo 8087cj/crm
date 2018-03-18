@@ -51,4 +51,13 @@ public class CstCustomerBizImplTest extends BaseTest {
     }
 
 
+    @Test
+    public void listCstCustomer() throws Exception {
+        List<CstCustomer> cstCustomers = cstCustomerBiz.listCstCustomer(cstCustomer,null);
+        for(CstCustomer s:cstCustomers){
+            System.out.println(s);
+        }
+    }
+
+
 }

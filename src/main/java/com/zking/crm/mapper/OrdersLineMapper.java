@@ -19,4 +19,10 @@ public interface OrdersLineMapper {
 
     int updateByPrimaryKey(OrdersLine record);
 
+    List<OrdersLine> listOrdersLineByOrder(OrdersLine record);
+
+    OrdersLine getSumPrice(OrdersLine record);
+
+    OrdersLine loadOrdersLine(OrdersLine record);
+
 }
