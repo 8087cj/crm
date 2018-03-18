@@ -32,7 +32,7 @@
         <if test="odrCustomer != null and ''!= odrCustomer">
             and o.odr_customer like concat('%', #{odrCustomer,jdbcType=VARCHAR},'%')
         </if>
-        <if test="odrAddr != null and ''!=odrAddr">
+        <if test="odrAddr != null and odrAddr!='全部' and ''!=odrAddr">
             and year(o.odr_date)=#{odrAddr,jdbcType=VARCHAR}
         </if>
         group by ol.odd_order_id

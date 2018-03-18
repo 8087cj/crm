@@ -12,7 +12,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="panel panel-default dropdown">
-                <a href="../admin.jsp">
+                <a href="/input/admin">
                     <span class="icon fa fa-tachometer"></span><span class="title">首页</span>
                 </a>
             </li>
@@ -24,8 +24,8 @@
                 <div id="dropdown-table" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="../sale/list.jsp">销售机会管理</a></li>
-                            <li><a href="../sale/dev.jsp">客户开发计划</a></li>
+                            <li><a href="/salChance/toList">销售机会管理</a></li>
+                            <li><a href="/salPlan/toDev">客户开发计划</a></li>
                         </ul>
                     </div>
                 </div>
@@ -73,10 +73,10 @@
                 <div id="dropdown-example" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="../rept/contr.jsp">客户贡献分析</a></li>
-                            <li><a href="../rept/cons.jsp">客户构成分析</a></li>
-                            <li><a href="../rept/ser.jsp">客户服务分析</a></li>
-                            <li><a href="../rept/lost.jsp">客户流失分析</a></li>
+                            <li><a href="/serviceReport/toContr">客户贡献分析</a></li>
+                            <li><a href="/serviceReport/toCons">客户构成分析</a></li>
+                            <li><a href="/serviceReport/toSer">客户服务分析</a></li>
+                            <li><a href="/serviceReport/toLost">客户流失分析</a></li>
                         </ul>
                     </div>
                 </div>
@@ -90,9 +90,9 @@
                 <div id="dropdown-icon" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="../base/dict.jsp">数据字典管理</a></li>
-                            <li><a href="../base/product.jsp"> 查询产品信息</a></li>
-                            <li><a href="../base/storage.jsp">查询库存</a></li>
+                            <li><a href="/BasDict/todict">数据字典管理</a></li>
+                            <li><a href="/product/toProduct"> 查询产品信息</a></li>
+                            <li><a href="/storages/toStorages">查询库存</a></li>
                         </ul>
                     </div>
                 </div>

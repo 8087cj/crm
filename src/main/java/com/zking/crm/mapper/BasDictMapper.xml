@@ -10,6 +10,13 @@
       <arg column="dict_is_editable" jdbcType="BIT" javaType="java.lang.Boolean" />
     </constructor>
   </resultMap>
+  <resultMap id="tt" type="com.zking.crm.model.BasDict" >
+    <id column="dict_id"  property="dictId" javaType="java.lang.Long" />
+    <result column="dict_type" property="dictType" javaType="java.lang.String" />
+    <result column="dict_item" property="dictItem" javaType="java.lang.String" />
+    <result column="dict_value" property="dictValue" javaType="java.lang.String" />
+    <result column="dict_is_editable" property="dictIsEditable" javaType="java.lang.Boolean" />
+  </resultMap>
   <sql id="Base_Column_List" >
     dict_id, dict_type, dict_item, dict_value, dict_is_editable
   </sql>
@@ -19,6 +26,34 @@
     from bas_dict
     where dict_id = #{dictId,jdbcType=BIGINT}
   </select>
+
+  <select id="listBasDict" resultMap="tt" parameterType="com.zking.crm.model.BasDict" >
+    select *
+    from bas_dict
+    where 1=1
+    <if test="dictType != null and ''!=dictType" >
+      and dict_type like concat('%', #{dictType,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="dictItem != null and ''!=dictItem" >
+      and dict_item like concat('%', #{dictItem,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="dictValue != null and ''!=dictValue" >
+      and dict_value like concat('%', #{dictValue,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+
+  <select id="getDict" resultMap="tt" parameterType="com.zking.crm.model.BasDict" >
+    select dict_item, dict_value
+    from bas_dict
+    where dict_type=#{dictType,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getDictVal" resultMap="tt" parameterType="com.zking.crm.model.BasDict" >
+    select dict_item
+    from bas_dict
+    where dict_value=#{dictValue,jdbcType=VARCHAR} and dict_type=#{dictType,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from bas_dict
     where dict_id = #{dictId,jdbcType=BIGINT}

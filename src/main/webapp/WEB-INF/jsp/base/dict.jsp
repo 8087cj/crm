@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2018/3/10 0010
-  Time: 下午 5:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -46,141 +39,54 @@
                         <div class="card">
 
                             <!--链接start-->
-                            <div class="button_bar">
-                                <button class="common_button" onclick="help('');">帮助</button>
-                                <button class="common_button" onclick="to('dict_add.jsp');">新建</button>
-                                <button class="common_button" onclick="reload();">查询</button>
+
+                            <table class="query_form_table" id="di">
+                                <div>
+                                    <div>
+                                        &nbsp;类别:<input id="dictType"/>
+                                        &nbsp;条目:<input id="dictItem"/>
+                                        &nbsp;值:<input size="20" id="dictValue"/>
+                                        &nbsp;&nbsp;<button class="common_button" id="bsBtn">查询</button>
+                                    </div>
+                                    <a  onclick="openBaseAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
+                                    <a  onclick="openBaseEditDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true" >修改</a>
+                                    <a  onclick="deleteBase()" class="easyui-linkbutton" iconCls="icon-add" plain="true">删除</a>
+                                </div>
+
+
+                            </table>
+
+
+                            <div id="bs-dialog1" class="easyui-dialog" data-options="closed:true,iconCls:'icon-save'" style="width:550px;  padding:20px;">
+                                <form method="post" id="bs-form1">
+
+                                    <table class="query_form_table">
+
+
+                                        <tr>
+                                            <th >类型:</th>
+                                            <td><input name="dictType"/><span class="red_star">*</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>条目:</th>
+                                            <td><input name="dictItem" /><span class="red_star">*</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>值:</th>
+                                            <td colspan="3"><input name="dictValue" /><span class="red_star">*</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>是否可编辑:</th>
+                                            <td><input type="radio" name="dictIsEditable" value="1"> 是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="radio" name="dictIsEditable" value="0"> 否</td>
+                                        </tr>
+
+
+                                    </table>
+                                </form>
                             </div>
-                            <table class="query_form_table">
-                                <tr>
-                                    <th>类别</th>
-                                    <td><input /></td>
-                                    <th>条目</th>
-                                    <td><input /></td>
-                                    <th>值</th>
-                                    <td><input /></td>
-                                </tr>
-                            </table>
-                            <br />
-                            <table class="data_list_table">
-                                <tr>
-                                    <th>编号</th>
-                                    <th>类别</th>
-                                    <th>条目</th>
-                                    <th>值</th>
-                                    <th>是否可编辑</th>
-                                    <th>操作</th>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">1</td>
-                                    <td class="list_data_ltext">企业客户等级</td>
-                                    <td class="list_data_text">普通客户</td>
-                                    <td class="list_data_text">1</td>
-                                    <td class="list_data_text">否</td>
-                                    <td class="list_data_op">　</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">2</td>
-                                    <td class="list_data_ltext">企业客户等级</td>
-                                    <td class="list_data_text">重点开发客户</td>
-                                    <td class="list_data_text">2</td>
-                                    <td class="list_data_text">否</td>
-                                    <td class="list_data_op">　</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">3</td>
-                                    <td class="list_data_ltext">企业客户等级</td>
-                                    <td class="list_data_text">大客户</td>
-                                    <td class="list_data_text">3</td>
-                                    <td class="list_data_text">否</td>
-                                    <td class="list_data_op">　</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">4</td>
-                                    <td class="list_data_ltext">企业客户等级</td>
-                                    <td class="list_data_text">合作伙伴</td>
-                                    <td class="list_data_text">4</td>
-                                    <td class="list_data_text">否</td>
-                                    <td class="list_data_op">　</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">5</td>
-                                    <td class="list_data_ltext">企业客户等级</td>
-                                    <td class="list_data_text">战略合作伙伴</td>
-                                    <td class="list_data_text">5</td>
-                                    <td class="list_data_text">否</td>
-                                    <td class="list_data_op">　</td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">6</td>
-                                    <td class="list_data_ltext">服务类型</td>
-                                    <td class="list_data_text">咨询</td>
-                                    <td class="list_data_text">咨询</td>
-                                    <td class="list_data_text">是</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('dict_edit.jsp');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="del('“服务类型：咨询”');" title="删除" src="../images/bt_del.gif" class="op_button" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">7</td>
-                                    <td class="list_data_ltext">服务类型</td>
-                                    <td class="list_data_text">投诉</td>
-                                    <td class="list_data_text">投诉</td>
-                                    <td class="list_data_text">是</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('dict_edit.jsp');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="del('“服务类型：投诉”');" title="删除" src="../images/bt_del.gif" class="op_button" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">8</td>
-                                    <td class="list_data_ltext">服务类型</td>
-                                    <td class="list_data_text">建议</td>
-                                    <td class="list_data_text">建议</td>
-                                    <td class="list_data_text">是</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('dict_edit.jsp');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="del('“服务类型：建议”');" title="删除" src="../images/bt_del.gif" class="op_button" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">9</td>
-                                    <td class="list_data_ltext">地区</td>
-                                    <td class="list_data_text">北京</td>
-                                    <td class="list_data_text">1</td>
-                                    <td class="list_data_text">是</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('dict_edit.jsp');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="del('“服务类型：建议”');" title="删除" src="../images/bt_del.gif" class="op_button" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="list_data_number">10</td>
-                                    <td class="list_data_ltext">地区</td>
-                                    <td class="list_data_text">华北</td>
-                                    <td class="list_data_text">2</td>
-                                    <td class="list_data_text">是</td>
-                                    <td class="list_data_op">
-                                        <img onclick="to('dict_edit.jsp');" title="编辑" src="../images/bt_edit.gif" class="op_button" />
-                                        <img onclick="del('“服务类型：建议”');" title="删除" src="../images/bt_del.gif" class="op_button" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th colspan="6" class="pager">
-                                        <div class="pager">
-                                            共59条记录 每页<input value="10" size="2" />条
-                                            第<input value="1" size="2"/>页/共5页
-                                            <a href="#">第一页</a>
-                                            <a href="#">上一页</a>
-                                            <a href="#">下一页</a>
-                                            <a href="#">最后一页</a>
-                                            转到<input value="1" size="2" />页
-                                            <button width="20" onclick="reload();">GO</button>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </table>
+
                             <!--链接end-->
 
                         </div>
@@ -195,9 +101,180 @@
             <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
         </div>
     </footer>
-    </div>
+</div>
 
-    <%@include file="/common/button.jsp" %>
+<script type="text/javascript" >
+    $(function() {
+        $('#di').datagrid( {
+            pagination : true,
+            pageList : [ 2, 4, 6, 8 ],
+            pageSize : 6,
+            idFiled : 'dictId',
+            fitColumns:true,
+            singleSelect : true,
+
+            url : 'BasDict/dict',
+            columns : [ [ {
+                field : 'dictId',
+                width :'12%',
+                title:'编号'
+            }, {
+                field : 'dictType',
+                width :'18%',
+                title:'类别'
+            }, {
+                field : 'dictItem',
+                width :'20%',
+                title:'条目'
+            }, {
+                field : 'dictValue',
+                width :'12%',
+                title:'值'
+            }, {
+                field : 'dictIsEditable',
+                width :'18%',
+                title:'是否可编辑',
+                formatter:function(val,rec){
+                    var a;
+                    if(rec.dictIsEditable==true){
+                        a="是";
+                    }else if(rec.dictIsEditable==false){
+                        a="否";
+                    }
+                    return a;
+                }
+
+            }] ]
+        });
+        $('#bsBtn').click(function () {
+            //获取查询文本框的值
+            var formData = {
+                dictType:$("#dictType").val(),
+                dictItem:$("#dictItem").val(),
+                dictValue:$("#dictValue").val()
+            };
+
+            $('#di').datagrid({
+                //在请求远程数据的时候发送额外的参数(dictName)
+                queryParams:formData
+            });
+            //终止默认行为
+            return false;
+        });
+    });
+
+    var url;
+
+    //数据字典新增
+    function openBaseAddDialog() {
+        $("#bs-dialog1").dialog({
+            closed: false,
+            modal:true,
+            title: "数据字典新增",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler: function(){
+                    $('#bs-form1').form('submit', {
+                        url:'/BasDict/add',
+                        success:function(data){
+                            alert(data);
+                            if(data==1){
+                                $.messager.alert('信息提示','提交成功！','info');
+                                $('#bs-dialog1').dialog('close');
+                                $("#di").datagrid("reload");//自动加载
+                            }
+                            else
+                            {
+                                $.messager.alert('信息提示','提交失败！','info');
+                            }
+                        }
+                    });
+                }
+
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#bs-dialog1').dialog('close');
+                }
+            }]
+        });
+    }
+
+    //删除数据字典
+    function deleteBase() {
+        var selectedRows = $("#di").datagrid("getSelected");
+        var item = $('#di').datagrid('getSelections');
+        var row = item[0];
+        if(row.dictIsEditable==false){
+            $.messager.alert("系统提示", "无法编辑的数据");
+            return;
+        }
+        $.messager.confirm("系统提示", "您确定要删除这条数据吗？", function(r) {
+            if (r) {
+                $.post("/BasDict/toDel", {dictId:selectedRows.dictId}, function(result) {
+                    if (result==1) {
+                        $.messager.alert("系统提示", "数据已成功删除！");
+                        $("#di").datagrid("reload");
+                    } else {
+                        $.messager.alert("系统提示", "数据删除失败，请联系系统管理员！");
+                    }
+                }, "json");
+            }
+        });
+    }
+
+    //修改数据字典
+    function openBaseEditDialog() {
+        var item = $('#di').datagrid('getSelections');
+        var row = item[0];
+        if(row.dictIsEditable==false){
+            $.messager.alert("系统提示", "无法编辑的数据");
+            return;
+        }
+
+        if(item.length!=1) {
+            $.messager.alert("系统提示", "请选择一条要编辑的数据");
+            return;
+        }
+        $('#bs-form1').form('load', row);
+
+        $('#bs-dialog1').dialog({
+            closed:false,
+            modal:true,
+            title:"修改数据字典",
+            buttons: [{
+                text: '确定',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    $('#bs-form1').form('submit', {
+                        url:'/BasDict/edit?dictId='+row.dictId,
+                        success:function(data){
+                            if(data==1){
+                                $.messager.alert('信息提示','提交成功！','info');
+                                $('#bs-dialog1').dialog('close');
+                                $("#di").datagrid("reload");
+                            }
+                            else
+                            {
+                                $.messager.alert('信息提示','提交失败！','info');
+                            }
+                        }
+                    });
+                }
+            }, {
+                text: '取消',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#bs-dialog1').dialog('close');
+                }
+            }]
+        });
+    }
+
+</script>
+<%@include file="/common/button.jsp" %>
 
 </body>
 
